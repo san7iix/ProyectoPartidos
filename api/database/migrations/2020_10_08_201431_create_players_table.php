@@ -15,9 +15,14 @@ class CreatePlayersTable extends Migration
     {
         Schema::create('players', function (Blueprint $table) {
             $table->increments('id')->unsigned();
+            $table->integer('id_user')->index()->unique()->nullable()->lenght(10)->unsigned();
+            $table->integer('id_team')->index()->nullable()->length(10)->unsigned();
+            $table->integer('id_manager')->index()->nullable()->lenght(10)->unsigned();
             $table->timestamps();
         });
     }
+
+    
 
     /**
      * Reverse the migrations.
