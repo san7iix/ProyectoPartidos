@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-10-2020 a las 01:45:29
+-- Tiempo de generación: 10-10-2020 a las 21:40:30
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -65,6 +65,13 @@ CREATE TABLE `matches` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `matches`
+--
+
+INSERT INTO `matches` (`id`, `id_team_1`, `id_team_2`, `id_place`, `created_at`, `updated_at`) VALUES
+(3, 1, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -149,6 +156,15 @@ CREATE TABLE `roles` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', '2020-10-11 00:14:41', '2020-10-11 00:14:41'),
+(2, 'Player', '2020-10-11 00:14:58', '2020-10-11 00:14:58'),
+(3, 'Manager', '2020-10-11 00:15:09', '2020-10-11 00:15:09');
+
 -- --------------------------------------------------------
 
 --
@@ -162,6 +178,13 @@ CREATE TABLE `teams` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `teams`
+--
+
+INSERT INTO `teams` (`id`, `name`, `uniform`, `created_at`, `updated_at`) VALUES
+(1, 'TeaamPro', 'Manchester', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -180,6 +203,13 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `id_role`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'javier', 'javier@mail.com', NULL, '$2y$10$5pp9tY9mASMp.rEoTA6u6.JQRIMmDiQTxXaH.sK2N8xGge1oF2Z3O', 1, NULL, '2020-10-10 00:25:50', '2020-10-10 00:25:50');
 
 --
 -- Índices para tablas volcadas
@@ -276,7 +306,7 @@ ALTER TABLE `managers`
 -- AUTO_INCREMENT de la tabla `matches`
 --
 ALTER TABLE `matches`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
@@ -300,19 +330,19 @@ ALTER TABLE `players`
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `teams`
 --
 ALTER TABLE `teams`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
