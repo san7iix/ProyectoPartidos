@@ -19,7 +19,10 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import Inicio from "./componentes/Inicio";
-import Usuarios from "./componentes/Usuarios";
+import Usuarios from "./componentes/Administrador/Usuarios/Usuarios";
+import EditarUsuario from "./componentes/Administrador/Usuarios/EditarUsuario";
+import DetalleUsuario from "./componentes/Administrador/Usuarios/DetalleUsuario";
+import Canchas from "./componentes/Administrador/Canchas/Canchas";
 const drawerWidth = 300;
 
 const useStyles = makeStyles((theme) => ({
@@ -152,6 +155,9 @@ function App() {
           <Switch>
             <Route exact path="/inicio" component={Inicio} />
             <Route exact path="/usuarios" component={Usuarios} />
+            <Route exact path="/usuarios/editar" component={EditarUsuario} />
+            <Route exact path="/usuarios/detalle" component={DetalleUsuario} />
+            <Route exact path="/canchas" component={Canchas} />
           </Switch>
         </main>
       </div>
