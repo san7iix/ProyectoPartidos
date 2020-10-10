@@ -70,7 +70,7 @@ class TablaUsuarios extends Component {
                                     <TableCell align="right">{row.created_at}</TableCell>
                                     <TableCell align="right">{row.updated_at}</TableCell>
                                     <TableCell align="right">
-                                        <Link to="Usuarios/detalle">Detalles</Link>
+                                        <Link to={`Usuarios/detalle/${row.id}`}>Detalles</Link>
                                         <Link to="Usuarios/editar">Editar</Link>
                                         <Link to="">Eliminar</Link>
                                     </TableCell>

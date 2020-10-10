@@ -22,6 +22,8 @@ import Usuarios from "./componentes/Administrador/Usuarios/Usuarios";
 import EditarUsuario from "./componentes/Administrador/Usuarios/EditarUsuario";
 import DetalleUsuario from "./componentes/Administrador/Usuarios/DetalleUsuario";
 import Canchas from "./componentes/Administrador/Canchas/Canchas";
+import PersonIcon from '@material-ui/icons/Person';
+import SportsSoccerIcon from '@material-ui/icons/SportsSoccer';
 const drawerWidth = 300;
 
 const useStyles = makeStyles((theme) => ({
@@ -135,14 +137,18 @@ function App() {
             </IconButton>
           </div>
           <List>
-            {['Inicio', 'Usuarios', 'Canchas', 'Partidos', 'Salir'].map((text, index) => (
-              <Link to={`/${text}`}>
-                <ListItem button key={text}>
-                  <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItem>
-              </Link>
-            ))}
+            <Link to="/usuarios">
+              <ListItem button >
+                <ListItemIcon><PersonIcon/></ListItemIcon>
+                <ListItemText primary="Usuarios" />
+              </ListItem>
+            </Link>
+            <Link to="">
+              <ListItem button >
+                <ListItemIcon><SportsSoccerIcon/></ListItemIcon>
+                <ListItemText primary="Canchas" />
+              </ListItem>
+            </Link>
           </List>
         </Drawer>
         <main
@@ -155,7 +161,7 @@ function App() {
             <Route exact path="/inicio" component={Inicio} />
             <Route exact path="/usuarios" component={Usuarios} />
             <Route exact path="/usuarios/editar" component={EditarUsuario} />
-            <Route exact path="/usuarios/detalle" component={DetalleUsuario} />
+            <Route exact path="/usuarios/detalle/{id}" component={DetalleUsuario} />
             <Route exact path="/canchas" component={Canchas} />
           </Switch>
         </main>
