@@ -56,7 +56,7 @@ Route::post('email/resend', 'App\Http\Controllers\Auth\VerificationController@re
 
 //Admin routes
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'admin'], function () {
 
     Route::get('/', 'App\Http\Controllers\AdminController@index')->name('admin.index');
 
