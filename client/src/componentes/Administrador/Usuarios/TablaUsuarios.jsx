@@ -19,22 +19,32 @@ class TablaUsuarios extends Component {
             usuarios: []
         }
         this.obtenerUsuarios = this.obtenerUsuarios.bind(this)
+        this.eliminarUsuario = this.eliminarUsuario.bind(this)
     }
 
     obtenerUsuarios() {
         UsuarioAdminService.getUsuarios()
             .then(res => {
-                res.users.map(usuario=>{
-                    if(usuario.id_role===1)usuario.id_role = "Manager"
+                res.users.map(usuario => {
+                    if (usuario.id_role === 1) usuario.id_role = "Manager"
                     else usuario.id_role = "Usuario"
                     return usuario
                 })
                 this.setState({ usuarios: res.users })
             })
             .catch(err => {
-                this.setState({usuarios: [] })
+                this.setState({ usuarios: [] })
             })
     }
+
+    eliminarUsuario(usuario){
+        UsuarioAdminService.eliminarUsuario(usuario)
+        .then((res)=>{
+          console.log(res)
+        })
+        this.obtenerUsuarios()
+      }
+    
 
     componentDidMount() {
         this.obtenerUsuarios()
@@ -70,9 +80,9 @@ class TablaUsuarios extends Component {
                                     <TableCell align="right">{row.created_at}</TableCell>
                                     <TableCell align="right">{row.updated_at}</TableCell>
                                     <TableCell align="right">
-                                        <Link to={`Usuarios/detalle/${row.id}`}>Detalles</Link>
-                                        <Link to="Usuarios/editar">Editar</Link>
-                                        <Link to="">Eliminar</Link>
+                                        <Link to={`usuarios/detalle/${row.id}`}>Detalles</Link>
+                                        <Link to={`usuarios/editar/${row.id}`}>Editar</Link>
+                                        <Link onClick={() => this.eliminarUsuario(row.id)} >Eliminar</Link>
                                     </TableCell>
                                 </TableRow>
                             ))}

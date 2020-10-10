@@ -14,8 +14,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import Divider from '@material-ui/core/Divider'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import Inicio from "./componentes/Inicio";
 import Usuarios from "./componentes/Administrador/Usuarios/Usuarios";
@@ -122,6 +121,7 @@ function App() {
           </Typography>
           </Toolbar>
         </AppBar>
+        <Divider/>
         <Drawer
           className={classes.drawer}
           variant="persistent"
@@ -136,6 +136,7 @@ function App() {
               {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </IconButton>
           </div>
+          <Divider/>
           <List>
             <Link to="/usuarios">
               <ListItem button >
@@ -143,7 +144,7 @@ function App() {
                 <ListItemText primary="Usuarios" />
               </ListItem>
             </Link>
-            <Link to="">
+            <Link to="/canchas">
               <ListItem button >
                 <ListItemIcon><SportsSoccerIcon/></ListItemIcon>
                 <ListItemText primary="Canchas" />
@@ -160,8 +161,8 @@ function App() {
           <Switch>
             <Route exact path="/inicio" component={Inicio} />
             <Route exact path="/usuarios" component={Usuarios} />
-            <Route exact path="/usuarios/editar" component={EditarUsuario} />
-            <Route exact path="/usuarios/detalle/{id}" component={DetalleUsuario} />
+            <Route exact path="/usuarios/editar/:id" component={EditarUsuario} />
+            <Route exact path="/usuarios/detalle/:id" component={DetalleUsuario} />
             <Route exact path="/canchas" component={Canchas} />
           </Switch>
         </main>
