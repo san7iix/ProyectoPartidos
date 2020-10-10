@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
-import TablePagination from '@material-ui/core'
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -9,26 +7,44 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Link } from 'react-router-dom'
+import UsuarioAdminService from '../../../api_interact/Administrador/Usuario/UsuarioAdmin'
 
-
-function createData(id, nombre, email, rol, fcreac, fmodif) {
-    return { id, nombre, email, rol, fcreac, fmodif };
-}
-
-const rows = [
-    createData(1, 'Usuario de prueba', 'demo@user.com', 'Admin', '2354-654321-463', '4894-3543541-1'),
-    createData(2, 'Usuario de prueba', 'demo@user.com', 'Manager', '2354-654321-463', '4894-3543541-1'),
-    createData(3, 'Usuario de prueba', 'demo@user.com', 'Jugador', '2354-654321-463', '4894-3543541-1'),
-    createData(4, 'Usuario de prueba', 'demo@user.com', 'Jugador', '2354-654321-463', '4894-3543541-1'),
-    createData(5, 'Usuario de prueba', 'demo@user.com', 'Jugador', '2354-654321-463', '4894-3543541-1')
-];
 
 
 class TablaUsuarios extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            usuarios: []
+        }
+        this.obtenerUsuarios = this.obtenerUsuarios.bind(this)
+    }
+
+    obtenerUsuarios() {
+        UsuarioAdminService.getUsuarios()
+            .then(res => {
+                res.users.map(usuario=>{
+                    if(usuario.id_role===1)usuario.id_role = "Manager"
+                    else usuario.id_role = "Usuario"
+                    return usuario
+                })
+                this.setState({ usuarios: res.users })
+            })
+            .catch(err => {
+                this.setState({usuarios: [] })
+            })
+    }
+
+    componentDidMount() {
+        this.obtenerUsuarios()
+    }
+
+
     render() {
         return (
             <div>
-                <h3>Usuarios registrados: {rows.length}</h3>
+                <h3>Usuarios registrados: {this.state.usuarios.length}</h3>
                 <TableContainer component={Paper}>
                     <Table className="table" aria-label="simple table">
                         <TableHead>
@@ -43,16 +59,16 @@ class TablaUsuarios extends Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map((row) => (
+                            {this.state.usuarios.map((row) => (
                                 <TableRow key={row.id}>
                                     <TableCell component="th" scope="row">
                                         {row.id}
                                     </TableCell>
-                                    <TableCell align="right">{row.nombre}</TableCell>
+                                    <TableCell align="right">{row.name}</TableCell>
                                     <TableCell align="right">{row.email}</TableCell>
-                                    <TableCell align="right">{row.rol}</TableCell>
-                                    <TableCell align="right">{row.fcreac}</TableCell>
-                                    <TableCell align="right">{row.fmodif}</TableCell>
+                                    <TableCell align="right">{row.id_role}</TableCell>
+                                    <TableCell align="right">{row.created_at}</TableCell>
+                                    <TableCell align="right">{row.updated_at}</TableCell>
                                     <TableCell align="right">
                                         <Link to="Usuarios/detalle">Detalles</Link>
                                         <Link to="Usuarios/editar">Editar</Link>
