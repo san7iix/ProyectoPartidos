@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -40,4 +41,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function player()
+    {
+        return $this->hasOne('App\Models\Player', 'id');
+    }
+    public function manager()
+    {
+        return $this->hasOne('App\Models\Manager', 'id');
+    }
+    public function role()
+    {
+        return $this->belongsTo('App\Models\Role', 'id_role');
+    }
+    
 }
