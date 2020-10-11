@@ -44,11 +44,11 @@ class User extends Authenticatable
 
     public function player()
     {
-        return $this->hasOne('App\Models\Player', 'id');
+        return $this->belongsTo('App\Models\Player', 'id');
     }
     public function manager()
     {
-        return $this->hasOne('App\Models\Manager', 'id');
+        return $this->belongsTo('App\Models\Manager', 'id');
     }
     public function role()
     {
