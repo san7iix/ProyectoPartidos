@@ -23,6 +23,8 @@ import DetalleUsuario from "./componentes/Administrador/Usuarios/DetalleUsuario"
 import Canchas from "./componentes/Administrador/Canchas/Canchas";
 import PersonIcon from '@material-ui/icons/Person';
 import SportsSoccerIcon from '@material-ui/icons/SportsSoccer';
+import InicioUsuario from './componentes/Usuario/InicioUsuario'
+
 const drawerWidth = 300;
 
 const useStyles = makeStyles((theme) => ({
@@ -138,6 +140,12 @@ function App() {
           </div>
           <Divider/>
           <List>
+            <Link to="/usuario/inicio">
+              <ListItem button >
+                <ListItemIcon><PersonIcon/></ListItemIcon>
+                <ListItemText primary="Inicio usuarios" />
+              </ListItem>
+            </Link>
             <Link to="/usuarios">
               <ListItem button >
                 <ListItemIcon><PersonIcon/></ListItemIcon>
@@ -159,11 +167,14 @@ function App() {
         >
           <div className={classes.drawerHeader} />
           <Switch>
+            {/* Rutas administrador */}
             <Route exact path="/inicio" component={Inicio} />
             <Route exact path="/usuarios" component={Usuarios} />
             <Route exact path="/usuarios/editar/:id" component={EditarUsuario} />
             <Route exact path="/usuarios/detalle/:id" component={DetalleUsuario} />
             <Route exact path="/canchas" component={Canchas} />
+            {/* Rutas usuario */}
+            <Route exact path="/usuario/inicio" component={InicioUsuario}/>
           </Switch>
         </main>
       </div>

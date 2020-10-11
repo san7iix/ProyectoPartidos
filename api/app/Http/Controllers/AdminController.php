@@ -69,9 +69,12 @@ class AdminController extends Controller
         $user = new User($request->all());
         $user->password = bcrypt($request->password);
         $user->email = $request->email;
-        $user->role_id = $request->role_id;
+        $user->id_role = $request->role_id;
         $user->save();
-        Session::flash('message', 'Successfully');
+        // Session::flash('message', 'Successfully');
+        return [
+            'success' => 200
+        ];
     }
 
     /**

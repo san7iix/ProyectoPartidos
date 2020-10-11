@@ -5,6 +5,8 @@ import CardCrearUsuario from './CardCrearUsuario'
 
 class Inicio extends Component {
     render() {
+
+
         return (
             <div>
                 <Grid container spacing={4}>

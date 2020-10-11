@@ -8,6 +8,10 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid'
 import UsuarioAdminService from '../../../api_interact/Administrador/Usuario/UsuarioAdmin'
+import Button from '@material-ui/core/Button';
+import CardActions from '@material-ui/core/CardActions';
+
+
 
 
 class EditarUsuario extends Component {
@@ -65,13 +69,16 @@ class EditarUsuario extends Component {
                             <form>
                                 <div >
                                     <TextField onChange={this.handleChange} id="outlined-basic" label="Nombre" required variant="outlined" size="small" name="nombre" value={this.state.nombre} />
-                                </div >
+                                </div>
+                                <br />
                                 <div>
                                     <TextField onChange={this.handleChange} id="outlined-basic" label="Email" type="email" required variant="outlined" size="small" name="email" value={this.state.email} />
                                 </div>
+                                <br />
                                 <div>
                                     <TextField onChange={this.handleChange} id="outlined-basic" label="Contraseña" type="password" required variant="outlined" size="small" name="password" />
                                 </div>
+                                <br />
                                 <div>
                                     <InputLabel onChange={this.handleChange} id="select_rol">Rol</InputLabel>
                                     <Select
@@ -84,6 +91,9 @@ class EditarUsuario extends Component {
                                 </div>
                             </form>
                         </CardContent>
+                        <CardActions>
+                            <Button size="small" >Editar</Button>
+                        </CardActions>
                     </Card>
                 </Grid>
             </Grid>

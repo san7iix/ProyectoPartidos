@@ -12,12 +12,13 @@ class CardCrearCancha extends Component {
             <Card>
                 <CardContent>
                     <Typography color="textSecondary" gutterBottom>
-                        Agregar usuario
+                        Agregar sitio
                     </Typography>
                     <form>
                         <div >
                             <TextField id="outlined-basic" label="Nombre" required variant="outlined" size="small" />
-                        </div >
+                        </div>
+                        <br/>
                         <div>
                             <TextField id="outlined-basic" label="Precio" type="number" required variant="outlined" size="small" />
                         </div>
