@@ -61,11 +61,11 @@ class AdminController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        /*if ($validator->fails()) {
-            return redirect('post/create')
-                ->withErrors($validator)
-                ->withInput();
-        }*/
+        if ($validator->fails()) {
+            return [
+                'success' => $validator
+            ];
+        }
         $user = new User($request->all());
         $user->password = bcrypt($request->password);
         $user->email = $request->email;
@@ -100,7 +100,22 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+        if ($validator->fails()) {
+            return [
+                'success' => $validator
+            ];
+        }
+        $user = User::find($id);
+        $user->fill($request->all());
+        $user->save();
+        return [
+            'success' => 200
+        ];
     }
 
     /**
@@ -111,6 +126,10 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return [
+            'success' => 200
+        ];
     }
 }
