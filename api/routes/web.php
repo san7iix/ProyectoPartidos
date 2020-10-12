@@ -71,6 +71,25 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('delete/{id}', 'App\Http\Controllers\AdminController@destroy')->name('user.delete');
     });
+    Route::group(['prefix' => 'place'], function () {
+        Route::post('create', 'App\Http\Controllers\PlaceController@store')->name('place.create');
+
+        Route::get('show/{id}', 'App\Http\Controllers\PlaceController@show')->name('place.show');
+
+        Route::put('update/{id}', 'App\Http\Controllers\PlaceController@update')->name('place.update');
+
+        Route::get('delete/{id}', 'App\Http\Controllers\PlaceController@destroy')->name('place.delete');
+    });
+
+    Route::group(['prefix' => 'team'], function () {
+        Route::post('create', 'App\Http\Controllers\TeamController@store')->name('team.create');
+
+        Route::get('show/{id}', 'App\Http\Controllers\TeamController@show')->name('team.show');
+
+        Route::put('update/{id}', 'App\Http\Controllers\TeamController@update')->name('team.update');
+
+        Route::get('delete/{id}', 'App\Http\Controllers\TeamController@destroy')->name('team.delete');
+    });
 });
 
 
