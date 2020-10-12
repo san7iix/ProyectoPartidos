@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Place;
+use Illuminate\Support\Facades\Validator;
 
 class PlaceController extends Controller
 {
@@ -13,7 +15,11 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        //
+        $places = Place::all();
+        return [
+            'places' => $places
+        ];
+
     }
 
     /**
@@ -24,7 +30,23 @@ class PlaceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'price' => ['required', 'string', 'max:255'],
+        ]);
+
+        if ($validator->fails()) {
+            return [
+                'success' => $validator
+            ];
+        }
+
+        $place = new Place($request->all());
+        $place->save();
+        return [
+            'success' => 200
+        ];
+
     }
 
     /**
@@ -35,7 +57,10 @@ class PlaceController extends Controller
      */
     public function show($id)
     {
-        //
+        $place = Place::find($id);
+        return [
+            'place' => $place
+        ];
     }
 
     /**
@@ -47,7 +72,21 @@ class PlaceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'price' => ['required', 'string', 'max:255'],
+        ]);
+        if ($validator->fails()) {
+            return [
+                'success' => $validator
+            ];
+        }
+        $place = Place::find($id);
+        $place->fill($request->all());
+        $place->save();
+        return [
+            'success' => 200
+        ];
     }
 
     /**
@@ -58,6 +97,10 @@ class PlaceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $place = Place::find($id);
+        $place->delete();
+        return [
+            'success' => 200
+        ];
     }
 }

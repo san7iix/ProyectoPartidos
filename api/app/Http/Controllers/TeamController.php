@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TeamController extends Controller
 {
@@ -13,7 +15,10 @@ class TeamController extends Controller
      */
     public function index()
     {
-        //
+        $teams = Team::all();
+        return [
+            'teams' => $teams
+        ];
     }
 
     /**
@@ -24,7 +29,20 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'uniform' => ['required', 'string', 'max:255'],
+        ]);
+        if ($validator->fails()) {
+            return [
+                'success' => $validator
+            ];
+        }
+        $team = new Team($request->all());
+        $team->save();
+        return [
+            'success' => 200
+        ];
     }
 
     /**
@@ -35,7 +53,10 @@ class TeamController extends Controller
      */
     public function show($id)
     {
-        //
+        $team = Team::find($id);
+        return [
+            'team' => $team
+        ];
     }
 
     /**
@@ -47,7 +68,22 @@ class TeamController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'uniform' => ['required', 'string', 'max:255'],
+        ]);
+        if ($validator->fails()) {
+            return [
+                'success' => $validator
+            ];
+        }
+        $team = Team::find($id);
+        $team->fill($request->all());
+        $team->save();
+        return [
+            'success' => 200
+        ];
+
     }
 
     /**
@@ -56,8 +92,13 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //Function in beta
     public function destroy($id)
     {
-        //
+        $team = Team::find($id);
+        $team->delete();
+        return [
+            'success' => 200
+        ];
     }
 }
