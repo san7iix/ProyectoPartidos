@@ -9,7 +9,6 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import UsuarioAdminService from '../../../api_interact/Administrador/Usuario/UsuarioAdmin'
-import { useHistory } from 'react-router'
 
 
 
@@ -20,7 +19,7 @@ class CardCrearUsuario extends Component {
         this.state = {
             name: '',
             email: '',
-            id_rol: '',
+            id_role: '',
             password: ''
         }
         this.handleChange = this.handleChange.bind(this)
@@ -38,7 +37,7 @@ class CardCrearUsuario extends Component {
         const Usuario = {
             name: this.state.name,
             email: this.state.email,
-            id_rol: this.state.id_rol,
+            id_role: this.state.id_role,
             password: this.state.password
         }
         UsuarioAdminService.crearUsuario(Usuario)
@@ -72,13 +71,13 @@ class CardCrearUsuario extends Component {
                         <div>
                             <InputLabel id="select_rol">Rol</InputLabel>
                             <Select
-                                name="id_rol"
+                                name="id_role"
                                 labelId="Rol"
                                 id="select_rol"
                                 onChange={this.handleChange}
                             >
-                                <MenuItem value={1}>Manager</MenuItem>
-                                <MenuItem value={2}>Jugador</MenuItem>
+                                <MenuItem value={2}>Manager</MenuItem>
+                                <MenuItem value={3}>Jugador</MenuItem>
                             </Select>
                         </div>
                     </form>

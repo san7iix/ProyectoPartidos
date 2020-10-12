@@ -40,7 +40,9 @@ class TablaUsuarios extends Component {
     eliminarUsuario(usuario){
         UsuarioAdminService.eliminarUsuario(usuario)
         .then((res)=>{
-          console.log(res)
+          if(res.success===200){
+              alert('ELiminación correcta')
+          }
         })
         this.obtenerUsuarios()
       }
