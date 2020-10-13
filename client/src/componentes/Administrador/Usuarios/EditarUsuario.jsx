@@ -61,10 +61,10 @@ class EditarUsuario extends Component {
         }
         UsuarioAdminService.editarUsuario(Usuario)
             .then(res => {
-                console.log(res)
-                // if(res.success===200){
-                //     this.props.history.push('/usuarios')
-                // }
+                if(res.success===200){
+                    alert('Editado correctamente')
+                    this.props.history.push('/usuarios')
+                }
             })
             .catch(err => {
                 console.log(err)

@@ -1,88 +1,94 @@
 import config from '../../config'
 class UsuarioAdminService {
 
-    getUsuarios() {
-        return fetch(`${config.API_URL}admin/user`, {
-            method: 'GET',
-        })
-            .then(res => res.json())
-            .then(data => {
-                return data
+    async getUsuarios() {
+        try {
+            const res = await fetch(`${config.API_URL}admin/user`, {
+                method: 'GET',
             })
-            .catch((e) => console.log(e))
+            const data = await res.json()
+            return data
+        } catch (e) {
+            return console.log(e)
+        }
     }
 
-    eliminarUsuario(usuario) {
-        return fetch(`${config.API_URL}admin/user/delete/${usuario}`, {
-            method: 'GET',
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                return data
+    async eliminarUsuario(usuario) {
+        try {
+            const res = await fetch(`${config.API_URL}admin/user/delete/${usuario}`, {
+                method: 'GET',
             })
-            .catch((e) => console.log(e))
+            const data = await res.json()
+            console.log(data)
+            return data
+        } catch (e) {
+            return console.log(e)
+        }
     }
 
-    crearUsuario(usuario) {
+    async crearUsuario(usuario) {
 
-        return fetch(`${config.API_URL}admin/user/create`, {
-            method: 'POST',
-            body: JSON.stringify({
-                "name": usuario.name,
-                "email": usuario.email,
-                "role_id": usuario.role_id,
-                "password": usuario.password
-            }),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
-            }
-
-        })
-            .then(res => res.json())
-            .then(data => {
-                return data
+        try {
+            const res = await fetch(`${config.API_URL}admin/user/create`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    "name": usuario.name,
+                    "email": usuario.email,
+                    "role_id": usuario.role_id,
+                    "password": usuario.password
+                }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+                }
             })
-            .catch((e) => console.log(e))
+            const data = await res.json()
+            return data
+        } catch (e) {
+            return console.log(e)
+        }
 
     }
 
-    getDetalleUsuario(id) {
-        return fetch(`${config.API_URL}admin/user/show/${id}`, {
-            method: 'GET',
-        })
-            .then(res => res.json())
-            .then(data => {
-                return data
+    async getDetalleUsuario(id) {
+        try {
+            const res = await fetch(`${config.API_URL}admin/user/show/${id}`, {
+                method: 'GET',
             })
-            .catch((e) => console.log(e))
+            const data = await res.json()
+            return data
+        } catch (e) {
+            return console.log(e)
+        }
     }
 
-    editarUsuario(usuario) {
-        return fetch(`${config.API_URL}admin/user/update/${usuario.id}`, {
-            method: 'PUT',
-            body: JSON.stringify({
-                "name": usuario.name,
-                "email": usuario.email,
-                "role_id": usuario.role_id,
-                "password": usuario.password
-            }),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
-            }
-
+    async editarUsuario(usuario) {
+        
+        let datos = JSON.stringify({
+            "name": usuario.name,
+            "email": usuario.email,
+            "role_id": usuario.role_id,
+            "password": usuario.password
         })
-            .then(res => res.json())
-            .then(data => {
-                return data
+
+        try {
+            const res = await fetch(`${config.API_URL}admin/user/update/${usuario.id}`, {
+                method: 'PUT',
+                body: datos,
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+                }
             })
-            .catch((e) => console.log(e))
+            const data = await res.json()
+            return data
+        } catch (e) {
+            return console.log(e)
+        }
     }
 }
 
