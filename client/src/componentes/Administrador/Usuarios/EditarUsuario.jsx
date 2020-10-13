@@ -20,12 +20,13 @@ class EditarUsuario extends Component {
         super(props);
         this.state = {
             id: this.props.match.params.id,
-            nombre: '',
+            name: '',
             email: '',
-            rol: '',
+            role_id: '',
             password: ''
         }
         this.handleChange = this.handleChange.bind(this)
+        this.editarUsuario = this.editarUsuario.bind(this)
     }
 
     handleChange(e) {
@@ -40,14 +41,32 @@ class EditarUsuario extends Component {
             .then(res => {
                 this.setState({
                     id: res.user.id,
-                    nombre: res.user.name,
+                    name: res.user.name,
                     email: res.user.email,
-                    rol: res.user.id_role
+                    role_id: ''
                 })
-                console.log(res.user)
             })
             .catch(err => {
                 this.setState({ error: 'Error' })
+            })
+    }
+
+    editarUsuario() {
+        let Usuario = {
+            id: this.state.id,
+            name: this.state.name,
+            email: this.state.email,
+            role_id: this.state.role_id,
+            password: this.state.password
+        }
+        UsuarioAdminService.editarUsuario(Usuario)
+            .then(res => {
+                if(res.success===200){
+                    this.props.history.push('/usuarios')
+                }
+            })
+            .catch(err => {
+                console.log(err)
             })
     }
 
@@ -68,7 +87,7 @@ class EditarUsuario extends Component {
                             </Typography>
                             <form>
                                 <div >
-                                    <TextField onChange={this.handleChange} id="outlined-basic" label="Nombre" required variant="outlined" size="small" name="nombre" value={this.state.nombre} />
+                                    <TextField onChange={this.handleChange} id="outlined-basic" label="Nombre" required variant="outlined" size="small" name="name" value={this.state.name} />
                                 </div>
                                 <br />
                                 <div>
@@ -80,10 +99,12 @@ class EditarUsuario extends Component {
                                 </div>
                                 <br />
                                 <div>
-                                    <InputLabel onChange={this.handleChange} id="select_rol">Rol</InputLabel>
+                                    <InputLabel  id="role_id">Rol</InputLabel>
                                     <Select
+                                        name="role_id"
                                         labelId="Rol"
-                                        id="select_rol"
+                                        id="role_id"
+                                        onChange={this.handleChange}
                                     >
                                         <MenuItem value={2}>Manager</MenuItem>
                                         <MenuItem value={3}>Jugador</MenuItem>
@@ -92,7 +113,7 @@ class EditarUsuario extends Component {
                             </form>
                         </CardContent>
                         <CardActions>
-                            <Button size="small" >Editar</Button>
+                            <Button size="small" onClick={this.editarUsuario}>Editar</Button>
                         </CardActions>
                     </Card>
                 </Grid>

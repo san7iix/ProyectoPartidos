@@ -19,7 +19,7 @@ class CardCrearUsuario extends Component {
         this.state = {
             name: '',
             email: '',
-            id_role: '',
+            role_id: '',
             password: ''
         }
         this.handleChange = this.handleChange.bind(this)
@@ -31,18 +31,19 @@ class CardCrearUsuario extends Component {
         this.setState({
             [name]: value
         })
+
     }
 
     crearUsuario() {
         const Usuario = {
             name: this.state.name,
             email: this.state.email,
-            id_role: this.state.id_role,
+            role_id: this.state.role_id,
             password: this.state.password
         }
         UsuarioAdminService.crearUsuario(Usuario)
             .then(res => {
-                alert("Usuario agregado correctamente")
+                console.log(res)
             })
             .catch(err => {
                 console.log(err)
@@ -71,7 +72,7 @@ class CardCrearUsuario extends Component {
                         <div>
                             <InputLabel id="select_rol">Rol</InputLabel>
                             <Select
-                                name="id_role"
+                                name="role_id"
                                 labelId="Rol"
                                 id="select_rol"
                                 onChange={this.handleChange}

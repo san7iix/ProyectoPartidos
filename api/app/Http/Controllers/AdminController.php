@@ -56,15 +56,17 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+
+        
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8']
         ]);
 
         if ($validator->fails()) {
             return [
-                'success' => $validator
+                'success' => $validator->fails()
             ];
         }
         $user = new User($request->all());
@@ -128,8 +130,9 @@ class AdminController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8'],
         ]);
+
         if ($validator->fails()) {
             return [
                 'success' => $validator
@@ -167,6 +170,10 @@ class AdminController extends Controller
                 'success' => 200
             ];
         }
+
+        return [
+            'success' => $user
+        ];
         
     }
 }
