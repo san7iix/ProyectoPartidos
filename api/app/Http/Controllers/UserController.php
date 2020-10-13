@@ -121,18 +121,27 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user = User::find($id);
+        if($request->password == null){
+            $request->password = $user->password;
+        }else if($request->name == null){
+            $request->name = $user->name;
+        }else if($request->email == null){
+            $request->email == $user->email;
+        }
         $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name' => ['string', 'max:255'],
+            'email' => ['string', 'email', 'max:255'],
+            'password' => ['string', 'min:8'],
         ]);
+
         if ($validator->fails()) {
             return [
                 'success' => $validator
             ];
         }
-        $user = User::find($id);
-        $user->fill($request->all());
+        $user->name = $request->name;
+        $user->email = $request->email;
         $user->save();
         return [
             'success' => 200
