@@ -2,7 +2,7 @@ import config from '../../config'
 class UsuarioAdminService {
 
     getUsuarios() {
-        return fetch(`${config.API_URL}admin`, {
+        return fetch(`${config.API_URL}admin/user`, {
             method: 'GET',
         })
             .then(res => res.json())
@@ -74,7 +74,7 @@ class UsuarioAdminService {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': '*'
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
             }
 
         })
