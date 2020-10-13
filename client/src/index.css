@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+table a:visited{
+  color: black;
+}
+
+table a{
+  color: black;
+}
+
+table a svg:hover{
+  color: #3f51b5;
+}

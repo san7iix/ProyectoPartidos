@@ -7,6 +7,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Link } from 'react-router-dom'
+import ReceiptIcon from '@material-ui/icons/Receipt';
+import DeleteIcon from '@material-ui/icons/Delete';
 import EquiposAdmin from '../../../api_interact/Administrador/Equipos/EquiposAdmin';
 
 
@@ -74,8 +76,8 @@ class TablaEquipos extends Component {
                                     <TableCell align="right">{row.name}</TableCell>
                                     <TableCell align="right">{row.uniform}</TableCell>
                                     <TableCell align="right">
-                                        <Link to={`/equipos/editar/${row.id}`}>Editar</Link>
-                                        <Link onClick={() => this.eliminarEquipo(row.id)}>Eliminar</Link>
+                                        <Link to={`/equipos/editar/${row.id}`}><ReceiptIcon/></Link>
+                                        <Link onClick={() => this.eliminarEquipo(row.id)}><DeleteIcon/></Link>
                                     </TableCell>
                                 </TableRow>
                             ))}

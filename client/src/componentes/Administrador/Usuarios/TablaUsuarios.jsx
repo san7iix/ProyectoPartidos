@@ -7,6 +7,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Link } from 'react-router-dom'
+import ReceiptIcon from '@material-ui/icons/Receipt';
+import CreateIcon from '@material-ui/icons/Create';
+import DeleteIcon from '@material-ui/icons/Delete';
 import UsuarioAdminService from '../../../api_interact/Administrador/Usuario/UsuarioAdmin'
 
 
@@ -83,9 +86,9 @@ class TablaUsuarios extends Component {
                                     <TableCell align="right">{row.created_at}</TableCell>
                                     <TableCell align="right">{row.updated_at}</TableCell>
                                     <TableCell align="right">
-                                        <Link to={`usuarios/detalle/${row.id}`}>Detalles</Link>
-                                        <Link to={`usuarios/editar/${row.id}`}>Editar</Link>
-                                        <Link onClick={() => this.eliminarUsuario(row.id)} >Eliminar</Link>
+                                        <Link to={`usuarios/detalle/${row.id}`}><ReceiptIcon/></Link>
+                                        <Link to={`usuarios/editar/${row.id}`}><CreateIcon/></Link>
+                                        <Link onClick={() => this.eliminarUsuario(row.id)} ><DeleteIcon/></Link>
                                     </TableCell>
                                 </TableRow>
                             ))}
