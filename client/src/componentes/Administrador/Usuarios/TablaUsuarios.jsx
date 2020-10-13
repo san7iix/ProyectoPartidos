@@ -27,7 +27,7 @@ class TablaUsuarios extends Component {
             .then(res => {
                 res.users.map(usuario => {
                     if (usuario.id_role === 2) usuario.id_role = "Manager"
-                    else if(usuario.id_role === 3) usuario.id_role = "Usuario"
+                    else if (usuario.id_role === 3) usuario.id_role = "Usuario"
                     return usuario
                 })
                 this.setState({ usuarios: res.users })
@@ -37,17 +37,17 @@ class TablaUsuarios extends Component {
             })
     }
 
-    eliminarUsuario(usuario){
+    eliminarUsuario(usuario) {
         UsuarioAdminService.eliminarUsuario(usuario)
-        .then((res)=>{
-          if(res.success===200){
-              alert('ELiminación correcta')
-          }
-        })
-        .catch(err=>console.log(err))
+            .then((res) => {
+                if (res.success === 200) {
+                    alert('ELiminación correcta')
+                }
+            })
+            .catch(err => console.log(err))
         this.obtenerUsuarios()
-      }
-    
+    }
+
 
     componentDidMount() {
         this.obtenerUsuarios()

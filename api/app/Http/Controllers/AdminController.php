@@ -150,6 +150,7 @@ class AdminController extends Controller
         }
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->id_role = $request->role_id;
         $user->save();
         return [
             'success' => 200

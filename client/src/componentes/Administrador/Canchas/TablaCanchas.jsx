@@ -7,25 +7,54 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Link } from 'react-router-dom'
+import CanchasAdmin from '../../../api_interact/Administrador/Canchas/CanchasAdmin';
 
 
-function createData(id, nombre, precio,) {
-    return { id, nombre, precio};
-}
 
-const rows = [
-    createData(1, 'Cancha 1', 1 ),
-    createData(2, 'Cancha 2', 1 ),
-    createData(3, 'Cancha 3', 1 ),
-    createData(4, 'Cancha 4', 1 ),
-];
 
 
 class TablaCanchas extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            canchas: []
+        }
+        this.obtenerCanchas = this.obtenerCanchas.bind(this)
+    }
+
+
+    obtenerCanchas(){
+        CanchasAdmin.GetCanchas()
+        .then(res => {
+            this.setState({ canchas: res.places })
+        })
+        .catch(err => {
+            this.setState({ canchas: [] })
+        })
+    }
+
+    eliminarCancha(id){
+        CanchasAdmin.Eliminar(id)
+        .then(res=>{
+            if(res.success==200){
+                alert("Eliminado correctamente")
+                this.obtenerCanchas()
+            }
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
+
+    componentDidMount(){
+        this.obtenerCanchas()
+    }
+
     render() {
         return (
             <div>
-                <h3>Numero de canchas: {rows.length}</h3>
+                <h3>Numero de canchas: {this.state.canchas.length}</h3>
                 <TableContainer component={Paper}>
                     <Table className="table" aria-label="simple table">
                         <TableHead>
@@ -37,17 +66,17 @@ class TablaCanchas extends Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map((row) => (
+                            {this.state.canchas.map((row) => (
                                 <TableRow key={row.id}>
                                     <TableCell component="th" scope="row">
                                         {row.id}
                                     </TableCell>
-                                    <TableCell align="right">{row.nombre}</TableCell>
-                                    <TableCell align="right">{row.precio}</TableCell>
+                                    <TableCell align="right">{row.name}</TableCell>
+                                    <TableCell align="right">{row.price}</TableCell>
                                     <TableCell align="right">
-                                        <Link to="Usuarios/detalle">Detalles</Link>
-                                        <Link to="Usuarios/editar">Editar</Link>
-                                        <Link to="">Eliminar</Link>
+                                        <Link to="canchas/detalle">Detalles</Link>
+                                        <Link to="canchas/editar">Editar</Link>
+                                        <Link onClick={() => this.eliminarCancha(row.id)}>Eliminar</Link>
                                     </TableCell>
                                 </TableRow>
                             ))}
