@@ -59,7 +59,7 @@ class AdminController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8'],
         ]);
 
         if ($validator->fails()) {
@@ -125,22 +125,30 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user = User::find($id);
         $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name' => ['string', 'max:255'],
+            'email' => ['string', 'email', 'max:255', 'unique:users'],
+            'password' => ['string', 'min:8'],
         ]);
         if ($validator->fails()) {
             return [
                 'success' => $validator
             ];
         }
-        $user = User::find($id);
-        $user->fill($request->all());
-        $user->save();
-        return [
-            'success' => 200
-        ];
+
+        if($request->password == null){
+            json_decode($request, true);
+            unset($request['password']);
+            json_encode($request);
+            dd($request);
+            $user->fill($request->all());
+            $user->save();
+            return [
+                'success' => 200
+            ];
+        }
+        
     }
 
     /**

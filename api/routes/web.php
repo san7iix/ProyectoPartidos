@@ -58,11 +58,12 @@ Route::post('email/resend', 'App\Http\Controllers\Auth\VerificationController@re
 
 Route::group(['prefix' => 'admin'], function () {
 
-    Route::get('/', 'App\Http\Controllers\AdminController@index')->name('admin.index');
-
     //User routes
 
     Route::group(['prefix' => 'user'], function () {
+
+        Route::get('/', 'App\Http\Controllers\AdminController@index')->name('admin.index');
+
         Route::post('create', 'App\Http\Controllers\AdminController@store')->name('user.create');
 
         Route::get('show/{id}', 'App\Http\Controllers\AdminController@show')->name('user.show');
