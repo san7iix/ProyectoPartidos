@@ -36,7 +36,6 @@ class CardCrearCancha extends Component {
 
         CanchasAdmin.Crear(cancha)
         .then(res=>{
-            console.log(res)
             if(res.success===200)alert('Cancha agregada correctamente')
             window.location.reload(false);
         })

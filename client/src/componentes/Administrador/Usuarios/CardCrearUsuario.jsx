@@ -43,7 +43,8 @@ class CardCrearUsuario extends Component {
         }
         UsuarioAdminService.crearUsuario(Usuario)
             .then(res => {
-                console.log(res)
+                if(res.success===200)alert('Equipo agregado correctamente')
+                window.location.reload(false);
             })
             .catch(err => {
                 console.log(err)

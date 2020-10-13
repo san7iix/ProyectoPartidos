@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+a{
+  text-decoration: none;
+  color: black;
+}
 
 table a:visited{
   color: black;

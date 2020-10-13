@@ -37,7 +37,6 @@ class CardCrearEquipo extends Component {
 
         EquiposAdmin.Crear(equipo)
         .then(res=>{
-            console.log(res)
             if(res.success===200)alert('Equipo agregado correctamente')
             window.location.reload(false);
         })
