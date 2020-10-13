@@ -56,6 +56,8 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -64,23 +66,23 @@ class AdminController extends Controller
 
         if ($validator->fails()) {
             return [
-                'success' => $validator
+                'success' => $validator->fails()
             ];
         }
         $user = new User($request->all());
         $user->password = bcrypt($request->password);
         $user->email = $request->email;
         $user->id_role = $request->role_id;
-        
+
         $user->save();
-        if($user->id_role == 2){
+        if ($user->id_role == 2) {
             $player = new Player();
             $player->id_user = $user->id;
             $player->save();
             return [
                 'success' => 200
             ];
-        }else if($user->id_role == 3){
+        } else if ($user->id_role == 3) {
             $manager = new Manager();
             $manager->id_user = $user->id;
             $manager->save();
@@ -88,11 +90,13 @@ class AdminController extends Controller
                 'success' => 200
             ];
         }
+
+
         return [
             'success' => 401
         ];
         // Session::flash('message', 'Successfully');
-        
+
     }
 
     /**
@@ -101,13 +105,13 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
+
     public function show($id)
     {
         $user = User::find($id);
-        if($user->id_role == 2){//Show data player
+        if ($user->id_role == 2) { //Show data player
             $data_user = $user->player;
-        }else if($user->id_role == 3){//Show data manager
+        } else if ($user->id_role == 3) { //Show data manager
             $data_user = $user->manager;
         }
         return [
@@ -126,19 +130,19 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-        if($request->password != null){
-            $validator = Validator::make($request->all(), [
-                'name' => ['string', 'max:255'],
-                'email' => ['string', 'email', 'max:255'],
-                'password' => ['string', 'min:8'],
-            ]);
-            $user->password = bcrypt($request->password);
-        }else{
-            $validator = Validator::make($request->all(), [
-                'name' => ['string', 'max:255'],
-                'email' => ['string', 'email', 'max:255'],
-            ]);
-        }    
+        if($request->password == null){
+            $request->password = $user->password;
+        }else if($request->name == null){
+            $request->name = $user->name;
+        }else if($request->email == null){
+            $request->email == $user->email;
+        }
+        $validator = Validator::make($request->all(), [
+            'name' => ['string', 'max:255'],
+            'email' => ['string', 'email', 'max:255'],
+            'password' => ['string', 'min:8'],
+        ]);
+
         if ($validator->fails()) {
             return [
                 'success' => $validator
@@ -163,21 +167,24 @@ class AdminController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        if($user->id_role == 2){
-            $player = Player::where('id_user','=',$id);
+        if ($user->id_role == 2) {
+            $player = Player::where('id_user', '=', $id);
             $player->delete();
             $user->delete();
             return [
                 'success' => 200
             ];
-        }else if($user->id_role == 3){
-            $manager = Manager::where('id_user','=',$id);
+        } else if ($user->id_role == 3) {
+            $manager = Manager::where('id_user', '=', $id);
             $manager->delete();
             $user->delete();
             return [
                 'success' => 200
             ];
         }
-        
+
+        return [
+            'success' => $user
+        ];
     }
 }
