@@ -42,6 +42,7 @@ class UsuarioAdminService {
 
         })
             .then(res => {
+                console.log(res)
                 return res.status
             })
             .catch((e) => console.log(e))
