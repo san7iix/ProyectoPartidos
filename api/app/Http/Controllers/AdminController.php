@@ -130,11 +130,17 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
+        if($request->password == null){
+            $request->password = $user->password;
+        }else if($request->name == null){
+            $request->name = $user->name;
+        }else if($request->email == null){
+            $request->email == $user->email;
+        }
         $validator = Validator::make($request->all(), [
             'name' => ['string', 'max:255'],
-            'email' => ['string', 'email', 'max:255']
-            // 'email' => ['string', 'email', 'max:255', 'unique:users']
-            // 'password' => ['string', 'min:8'],
+            'email' => ['string', 'email', 'max:255'],
+            'password' => ['string', 'min:8'],
         ]);
 
         if ($validator->fails()) {
@@ -142,23 +148,13 @@ class AdminController extends Controller
                 'success' => $validator
             ];
         }
-
-
-        if ($request->password == null) {
-            json_decode($request, true);
-            unset($request['password']);
-            json_encode($request, true);
-            dd($request);
-            $user->fill($request->all());
-            $user->save();
-            return [
-                'success' => 200
-            ];
-        }else{
-            return [
-                'success' => 200
-            ];
-        }
+        $user->fill($request->all());
+        $user->save();
+        return [
+            'success' => 200
+        ];
+        
+        
     }
 
     /**
