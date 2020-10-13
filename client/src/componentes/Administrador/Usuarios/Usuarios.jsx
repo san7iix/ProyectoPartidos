@@ -3,7 +3,7 @@ import TablaUsuarios from './TablaUsuarios'
 import Grid from '@material-ui/core/Grid'
 import CardCrearUsuario from './CardCrearUsuario'
 
-class Inicio extends Component {
+class Usuarios extends Component {
     render() {
 
 
@@ -23,4 +23,4 @@ class Inicio extends Component {
     }
 }
 
-export default Inicio;
+export default Usuarios;

@@ -25,6 +25,9 @@ import EditarCancha from "./componentes/Administrador/Canchas/EditarCancha";
 import PersonIcon from '@material-ui/icons/Person';
 import SportsSoccerIcon from '@material-ui/icons/SportsSoccer';
 import InicioUsuario from './componentes/Usuario/InicioUsuario'
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import Equipos from './componentes/Administrador/Equipos/Equipos';
+import EditarEquipo from './componentes/Administrador/Equipos/EditarEquipo';
 
 const drawerWidth = 300;
 
@@ -155,8 +158,14 @@ function App() {
             </Link>
             <Link to="/canchas">
               <ListItem button >
-                <ListItemIcon><SportsSoccerIcon/></ListItemIcon>
+                <ListItemIcon><LocationOnIcon/></ListItemIcon>
                 <ListItemText primary="Canchas" />
+              </ListItem>
+            </Link>
+            <Link to="/equipos">
+              <ListItem button >
+                <ListItemIcon><SportsSoccerIcon/></ListItemIcon>
+                <ListItemText primary="Equipos" />
               </ListItem>
             </Link>
           </List>
@@ -175,6 +184,8 @@ function App() {
             <Route exact path="/usuarios/detalle/:id" component={DetalleUsuario} />
             <Route exact path="/canchas" component={Canchas} />
             <Route exact path="/canchas/editar/:id" component={EditarCancha} />
+            <Route exact path="/equipos" component={Equipos} />
+            <Route exact path="/equipos/editar/:id" component={EditarEquipo} />
             {/* Rutas usuario */}
             <Route exact path="/usuario/inicio" component={InicioUsuario}/>
           </Switch>

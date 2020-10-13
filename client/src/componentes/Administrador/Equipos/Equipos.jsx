@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import TablaCanchas from './TablaCanchas'
 import Grid from '@material-ui/core/Grid'
-import CardCrearCancha from './CardCrearCancha'
+import TablaEquipos from './TablaEquipos';
+import CardCrearEquipo from './CardCrearEquipo';
 
-class Canchas extends Component {
+class Equipos extends Component {
     render() {
         return (
             <div>
                 <Grid container spacing={4}>
                     <Grid item xs={2}>
-                        <CardCrearCancha />
+                        <CardCrearEquipo></CardCrearEquipo>
                     </Grid>
                     <Grid item>
-                        <TablaCanchas />
+                        <TablaEquipos />
 
                     </Grid>
                 </Grid>
@@ -21,4 +21,4 @@ class Canchas extends Component {
     }
 }
 
-export default Canchas;
+export default Equipos;
