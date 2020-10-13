@@ -140,7 +140,7 @@ class AdminController extends Controller
         if($request->password == null){
             json_decode($request, true);
             unset($request['password']);
-            json_encode($request);
+            json_encode($request, true);
             dd($request);
             $user->fill($request->all());
             $user->save();
