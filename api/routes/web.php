@@ -58,11 +58,12 @@ Route::post('email/resend', 'App\Http\Controllers\Auth\VerificationController@re
 
 Route::group(['prefix' => 'admin'], function () {
 
-    Route::get('/', 'App\Http\Controllers\AdminController@index')->name('admin.index');
-
     //User routes
 
     Route::group(['prefix' => 'user'], function () {
+
+        Route::get('/', 'App\Http\Controllers\AdminController@index')->name('admin.index');
+
         Route::post('create', 'App\Http\Controllers\AdminController@store')->name('user.create');
 
         Route::get('show/{id}', 'App\Http\Controllers\AdminController@show')->name('user.show');
@@ -72,6 +73,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('delete/{id}', 'App\Http\Controllers\AdminController@destroy')->name('user.delete');
     });
     Route::group(['prefix' => 'place'], function () {
+
+        Route::get('/', 'App\Http\Controllers\PlaceController@index')->name('place.index');
+
         Route::post('create', 'App\Http\Controllers\PlaceController@store')->name('place.create');
 
         Route::get('show/{id}', 'App\Http\Controllers\PlaceController@show')->name('place.show');
@@ -82,6 +86,9 @@ Route::group(['prefix' => 'admin'], function () {
     });
 
     Route::group(['prefix' => 'team'], function () {
+
+        Route::get('/', 'App\Http\Controllers\TeamController@index')->name('team.index');
+
         Route::post('create', 'App\Http\Controllers\TeamController@store')->name('team.create');
 
         Route::get('show/{id}', 'App\Http\Controllers\TeamController@show')->name('team.show');
