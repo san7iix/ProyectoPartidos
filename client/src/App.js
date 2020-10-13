@@ -21,6 +21,7 @@ import Usuarios from "./componentes/Administrador/Usuarios/Usuarios";
 import EditarUsuario from "./componentes/Administrador/Usuarios/EditarUsuario";
 import DetalleUsuario from "./componentes/Administrador/Usuarios/DetalleUsuario";
 import Canchas from "./componentes/Administrador/Canchas/Canchas";
+import EditarCancha from "./componentes/Administrador/Canchas/EditarCancha";
 import PersonIcon from '@material-ui/icons/Person';
 import SportsSoccerIcon from '@material-ui/icons/SportsSoccer';
 import InicioUsuario from './componentes/Usuario/InicioUsuario'
@@ -173,6 +174,7 @@ function App() {
             <Route exact path="/usuarios/editar/:id" component={EditarUsuario} />
             <Route exact path="/usuarios/detalle/:id" component={DetalleUsuario} />
             <Route exact path="/canchas" component={Canchas} />
+            <Route exact path="/canchas/editar/:id" component={EditarCancha} />
             {/* Rutas usuario */}
             <Route exact path="/usuario/inicio" component={InicioUsuario}/>
           </Switch>

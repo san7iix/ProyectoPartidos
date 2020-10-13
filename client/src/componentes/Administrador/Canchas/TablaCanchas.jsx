@@ -37,7 +37,7 @@ class TablaCanchas extends Component {
     eliminarCancha(id){
         CanchasAdmin.Eliminar(id)
         .then(res=>{
-            if(res.success==200){
+            if(res.success===200){
                 alert("Eliminado correctamente")
                 this.obtenerCanchas()
             }
@@ -74,8 +74,7 @@ class TablaCanchas extends Component {
                                     <TableCell align="right">{row.name}</TableCell>
                                     <TableCell align="right">{row.price}</TableCell>
                                     <TableCell align="right">
-                                        <Link to="canchas/detalle">Detalles</Link>
-                                        <Link to="canchas/editar">Editar</Link>
+                                        <Link to={`/canchas/editar/${row.id}`}>Editar</Link>
                                         <Link onClick={() => this.eliminarCancha(row.id)}>Eliminar</Link>
                                     </TableCell>
                                 </TableRow>

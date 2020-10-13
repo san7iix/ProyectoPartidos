@@ -58,15 +58,15 @@ class CardCrearUsuario extends Component {
                     </Typography>
                     <form>
                         <div >
-                            <TextField id="outlined-basic" label="Nombre" required variant="outlined" size="small" onChange={this.handleChange} name="name"/>
+                            <TextField id="outlined-basic" label="Nombre" required variant="outlined" size="small" onChange={this.handleChange} name="name" />
                         </div >
                         <br />
                         <div>
-                            <TextField id="outlined-basic" label="Email" type="email" required variant="outlined" size="small" onChange={this.handleChange} name="email"/>
+                            <TextField id="outlined-basic" label="Email" type="email" required variant="outlined" size="small" onChange={this.handleChange} name="email" />
                         </div>
                         <br />
                         <div>
-                            <TextField id="outlined-basic" label="Contraseña" type="password" required variant="outlined" size="small" onChange={this.handleChange} name="password"/>
+                            <TextField id="outlined-basic" label="Contraseña" type="password" required variant="outlined" size="small" onChange={this.handleChange} name="password" />
                         </div>
                         <br />
                         <div>
