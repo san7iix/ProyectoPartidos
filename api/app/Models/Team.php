@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Team extends Model
 {
     use HasFactory;
+
+    //To prevent mass-assignamet exception
+    protected $fillable = ['name', 'uniform'];
+
     public function manager()
     {
         return $this->belongsTo('App\Models\manager', 'id');

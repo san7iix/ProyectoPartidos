@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Match extends Model
 {
     use HasFactory;
+
+    //To prevent mass-assignamet exception
+    protected $fillable = ['id_team_1', 'id_team_2', 'id_place', 'state', 'date'];
+
     public function team_1()
     {
         return $this->belongsTo('App\Models\Team', 'id_team_1');

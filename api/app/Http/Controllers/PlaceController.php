@@ -42,6 +42,7 @@ class PlaceController extends Controller
         }
 
         $place = new Place($request->all());
+        $place->fill($request->all());
         $place->save();
         return [
             'success' => 200
