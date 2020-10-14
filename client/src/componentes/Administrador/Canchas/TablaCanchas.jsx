@@ -7,7 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Link } from 'react-router-dom'
-import CreateIcon from '@material-ui/icons/Create';
+import ReceiptIcon from '@material-ui/icons/Receipt';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CanchasAdmin from '../../../api_interact/Administrador/Canchas/CanchasAdmin';
 
@@ -76,7 +76,7 @@ class TablaCanchas extends Component {
                                     <TableCell align="right">{row.name}</TableCell>
                                     <TableCell align="right">{row.price}</TableCell>
                                     <TableCell align="right">
-                                        <Link to={`/canchas/editar/${row.id}`}><CreateIcon/></Link>
+                                        <Link to={`/canchas/editar/${row.id}`}><ReceiptIcon/></Link>
                                         <Link onClick={() => this.eliminarCancha(row.id)}><DeleteIcon/></Link>
                                     </TableCell>
                                 </TableRow>

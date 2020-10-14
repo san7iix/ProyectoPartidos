@@ -25,10 +25,6 @@ class AdminController extends Controller
         $users = User::all();
 
         $data_users = $this->data_users();
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
         return [
             'users' => $users,
             'data_users' => $data_users
