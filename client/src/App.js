@@ -28,6 +28,7 @@ import InicioUsuario from './componentes/Usuario/InicioUsuario'
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import Equipos from './componentes/Administrador/Equipos/Equipos';
 import EditarEquipo from './componentes/Administrador/Equipos/EditarEquipo';
+import HomeIcon from '@material-ui/icons/Home';
 
 const drawerWidth = 300;
 
@@ -146,7 +147,7 @@ function App() {
           <List>
             <Link to="/usuario/inicio">
               <ListItem button >
-                <ListItemIcon><PersonIcon/></ListItemIcon>
+                <ListItemIcon><HomeIcon/></ListItemIcon>
                 <ListItemText primary="Inicio usuarios" />
               </ListItem>
             </Link>
