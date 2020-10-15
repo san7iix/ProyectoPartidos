@@ -41,7 +41,6 @@ class AgendarPartido extends Component {
         EquipoManager.CreateMatch(datos)
         .then(res=>{
             console.log(res)
-
             if(res.success===4)this.setState({
                 error: 'No puede agendarse un partido con equipos de id iguales'
             })

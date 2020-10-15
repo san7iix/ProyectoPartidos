@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography';
+import EquipoManager from '../../../api_interact/Manager/Equipos/EquipoManager';
 
 class InicioUsuario extends Component {
 
@@ -9,15 +10,43 @@ class InicioUsuario extends Component {
         super(props)
 
         this.state = {
+            id_team: this.props.id_team,
             partido: {
-                equipo1: 'Equipo 1',
-                equipo2: 'Equipo 2',
-                fecha: '01-12-2020',
-                hora: '10:00',
-                lugar: 'Los Almendros'
+                equipo1: '',
+                equipo2: '',
+                fecha: '',
+                hora: '',
+                lugar: ''
             }
         }
+
+        this.getMatch = this.getMatch.bind(this)
     }
+
+    getMatch(){
+        EquipoManager.GetMatchsPending(this.state.id_team)
+        .then(res=>{
+            let resp=res[0]
+            this.setState({
+                equipo1: resp.id_team_1,
+                equipo2: resp.id_team_1,
+                fecha: resp.date,
+                hora: resp.hour,
+                lugar: resp.id_place
+            })
+            console.log(this.state)
+        })
+        .catch(err=>{
+
+        })
+    }
+
+
+    componentDidMount(){
+        this.getMatch()
+    }
+
+    
 
     render() {
         return (

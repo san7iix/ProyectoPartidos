@@ -41,7 +41,7 @@ class InicioUsuario extends Component {
         return (
             <Grid container spacing={4}>
                     {
-                        this.state.equipo.id_user && <Grid item xs={4}><CardPartido/></Grid> 
+                        this.state.equipo.id_user && <Grid item xs={4}><CardPartido id_team={this.state.equipo.id}/></Grid> 
                     }
                     
                 
