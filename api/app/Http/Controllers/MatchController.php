@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Match;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class MatchController extends Controller
 {
@@ -13,7 +15,8 @@ class MatchController extends Controller
      */
     public function index()
     {
-        //
+        $matches = Match::all();
+        return $matches;
     }
 
     /**
@@ -24,7 +27,24 @@ class MatchController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $match = new Match($request->all());
+        $validate = Validator::make($request->all(), [
+            'id_team_1'=> ['required'],
+            'id_team_2'=> ['required'],
+            'date'=> ['required', 'max:255', 'string']
+        ]);
+        if ($validate->fails()) {
+            return [
+                'success' => $validate
+            ];
+        }
+
+        $match->fill($request->all());
+        $match->state = 1;
+        $match->save();
+        return [
+            'success' => 200
+        ];
     }
 
     /**
