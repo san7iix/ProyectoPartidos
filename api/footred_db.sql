@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-10-2020 a las 21:40:30
+-- Tiempo de generación: 15-10-2020 a las 08:59:46
 -- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.4.10
+-- Versión de PHP: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -51,6 +51,14 @@ CREATE TABLE `managers` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `managers`
+--
+
+INSERT INTO `managers` (`id`, `id_team`, `id_user`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, '2020-10-15 10:20:49', '2020-10-15 10:20:49'),
+(2, NULL, 6, '2020-10-15 11:00:54', '2020-10-15 11:00:54');
+
 -- --------------------------------------------------------
 
 --
@@ -63,15 +71,17 @@ CREATE TABLE `matches` (
   `id_team_2` int(10) UNSIGNED DEFAULT NULL,
   `id_place` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `state` int(10) UNSIGNED DEFAULT NULL,
+  `date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `matches`
 --
 
-INSERT INTO `matches` (`id`, `id_team_1`, `id_team_2`, `id_place`, `created_at`, `updated_at`) VALUES
-(3, 1, NULL, NULL, NULL, NULL);
+INSERT INTO `matches` (`id`, `id_team_1`, `id_team_2`, `id_place`, `created_at`, `updated_at`, `state`, `date`) VALUES
+(3, 1, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -100,7 +110,14 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (92, '2020_10_08_213908_create_relationships_tables', 1),
 (93, '2020_10_08_214639_create_matches_table', 2),
 (94, '2020_10_08_214704_create_places_table', 2),
-(95, '2020_10_08_233418_create_relationships_matches_places', 2);
+(95, '2020_10_08_233418_create_relationships_matches_places', 2),
+(96, '2020_10_12_183552_create_column_state_from_matches', 3),
+(97, '2020_10_15_045344_create_id_man_to_teams', 3),
+(98, '2020_10_15_050719_create_relationships_manager_teams', 4),
+(99, '2020_10_15_050845_create_relationships_manager_teams', 4),
+(100, '2020_10_15_051338_create_relation', 5),
+(101, '2020_10_15_051704_create_relation', 6),
+(102, '2020_10_15_052808_create_relation', 7);
 
 -- --------------------------------------------------------
 
@@ -143,6 +160,15 @@ CREATE TABLE `players` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `players`
+--
+
+INSERT INTO `players` (`id`, `id_user`, `id_team`, `id_manager`, `created_at`, `updated_at`) VALUES
+(1, 3, 2, NULL, '2020-10-15 10:35:39', '2020-10-15 10:35:39'),
+(2, 4, NULL, NULL, '2020-10-15 10:36:29', '2020-10-15 10:36:29'),
+(3, 5, NULL, NULL, '2020-10-15 10:36:34', '2020-10-15 10:36:34');
+
 -- --------------------------------------------------------
 
 --
@@ -176,15 +202,17 @@ CREATE TABLE `teams` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `uniform` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `id_manager` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `teams`
 --
 
-INSERT INTO `teams` (`id`, `name`, `uniform`, `created_at`, `updated_at`) VALUES
-(1, 'TeaamPro', 'Manchester', NULL, NULL);
+INSERT INTO `teams` (`id`, `name`, `uniform`, `created_at`, `updated_at`, `id_manager`) VALUES
+(1, 'TeaamPro', 'Manchester', NULL, NULL, 2),
+(2, 'LOS 3HP', 'ADSAD', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -209,7 +237,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `id_role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'javier', 'javier@mail.com', NULL, '$2y$10$5pp9tY9mASMp.rEoTA6u6.JQRIMmDiQTxXaH.sK2N8xGge1oF2Z3O', 1, NULL, '2020-10-10 00:25:50', '2020-10-10 00:25:50');
+(1, 'javier', 'javier@mail.com', NULL, '$2y$10$5pp9tY9mASMp.rEoTA6u6.JQRIMmDiQTxXaH.sK2N8xGge1oF2Z3O', 1, NULL, '2020-10-10 00:25:50', '2020-10-10 00:25:50'),
+(2, 'javeir', 'jadasa@mail.com', NULL, '$2y$10$Vs9vRK/YhWNIpbXZ2zmTYecwYPelqAnOepwEOJBKgW4wm0RU.FVA2', 3, NULL, '2020-10-15 10:20:49', '2020-10-15 10:20:49'),
+(3, 'javeir', 'jadaaasa@mail.com', NULL, '$2y$10$zHU9LSW6xZMuMV6q7ACOHe/wN5R3MqfAUWIWLCtVBGTTQTPYsH5se', 2, NULL, '2020-10-15 10:35:39', '2020-10-15 10:35:39'),
+(4, 'javeir', 'jadaa3asa@mail.com', NULL, '$2y$10$cvVZwidq2h36Czdnj.1V/eZmlgsmnSqaiIEjTHfbiY5AZiOSPEPuW', 2, NULL, '2020-10-15 10:36:29', '2020-10-15 10:36:29'),
+(5, 'javeir', 'jad11aa3asa@mail.com', NULL, '$2y$10$Bej8PaQ79/eidbUFbc43yO7zkeIMa8QQxpmIA0SQ7DU35oUqTRgNy', 2, NULL, '2020-10-15 10:36:34', '2020-10-15 10:36:34'),
+(6, 'javeir', 'jad111aa3asa@mail.com', NULL, '$2y$10$aqezXNOuK5TD4wRItgj96u9Q3gYx4PNG8ibyvbsl21y6k8whQUDCa', 3, NULL, '2020-10-15 11:00:54', '2020-10-15 11:00:54');
 
 --
 -- Índices para tablas volcadas
@@ -276,7 +309,8 @@ ALTER TABLE `roles`
 -- Indices de la tabla `teams`
 --
 ALTER TABLE `teams`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `teams_id_manager_index` (`id_manager`);
 
 --
 -- Indices de la tabla `users`
@@ -300,7 +334,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT de la tabla `managers`
 --
 ALTER TABLE `managers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `matches`
@@ -312,7 +346,7 @@ ALTER TABLE `matches`
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT de la tabla `places`
@@ -324,7 +358,7 @@ ALTER TABLE `places`
 -- AUTO_INCREMENT de la tabla `players`
 --
 ALTER TABLE `players`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -336,13 +370,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `teams`
 --
 ALTER TABLE `teams`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
@@ -370,6 +404,12 @@ ALTER TABLE `players`
   ADD CONSTRAINT `players_id_manager_foreign` FOREIGN KEY (`id_manager`) REFERENCES `managers` (`id`),
   ADD CONSTRAINT `players_id_team_foreign` FOREIGN KEY (`id_team`) REFERENCES `teams` (`id`),
   ADD CONSTRAINT `players_id_user_foreign` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
+
+--
+-- Filtros para la tabla `teams`
+--
+ALTER TABLE `teams`
+  ADD CONSTRAINT `teams_id_manager_foreign` FOREIGN KEY (`id_manager`) REFERENCES `managers` (`id_user`);
 
 --
 -- Filtros para la tabla `users`

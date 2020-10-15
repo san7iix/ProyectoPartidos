@@ -16,6 +16,9 @@ class Manager extends Model
     {
         return $this->hasOne('App\Models\Team', 'id_team');
     }
+    public function team_id(){
+        return $this->belongsTo('App\Models\Team', 'id_user');
+    }
     public function players()
     {
         return $this->hasMany('App\Models\Player', 'id');

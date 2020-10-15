@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Player;
 use App\Models\Team;
+use App\Models\Manager;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -29,6 +30,7 @@ class TeamController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -48,6 +50,22 @@ class TeamController extends Controller
         ];
     }
 
+    public function searchPlayers()
+    {
+        // $players = Player::where('id_team',null)->get();
+        // $users = User::where('id_role',2)->get();
+        // return [
+        //     'players' => $players,
+        //     'users' => $users
+        // ];
+
+        $data = Player::select('users.name', 'players.id_user')
+                ->join('users', 'players.id_user', '=', 'users.id')->where('id_team',null)
+                ->get();
+
+        return $data;
+    }
+
     public function addPlayer(Request $request, $id){
         
     }
@@ -58,12 +76,20 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showTeam($id)
     {
-        $team = Team::find($id);
-        return [
-            'team' => $team,
-        ];
+        // $team = Team::where('id_manager',$id)->get();
+        // $man = Manager::where('id_user',$id)->get();
+        // return [
+        //     'team' => $team,
+        //     'manager' => $man
+        // ];
+        $data = Team::select('teams.name', 'managers.id_user', 'users.name as name_user')
+                ->join('managers', 'teams.id_manager', '=', 'managers.id_user')
+                ->join('users', 'users.id', '=', 'managers.id_user')->where('id_manager',$id)
+                ->get();
+
+        return $data;
     }
 
     /**
