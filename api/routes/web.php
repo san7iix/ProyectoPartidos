@@ -125,6 +125,11 @@ Route::group(['prefix' => 'manager'], function (){
         'as' => 'addPlayer',
         'uses' => 'App\Http\Controllers\ManagerController@addPlayer',
     ]);
+
+    Route::put('removePlayer/{id_team}/{id_player}', [
+        'as' => 'removePlayer',
+        'uses' => 'App\Http\Controllers\ManagerController@removePlayer',
+    ]);
     
     Route::get('showTeamPlayers/{id}', 'App\Http\Controllers\TeamController@showTeam')->name('team.showTeamPlayers');
 

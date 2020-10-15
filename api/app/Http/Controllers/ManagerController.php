@@ -77,4 +77,14 @@ class ManagerController extends Controller
             'success' => 200
         ];
     }
+
+    public function removePlayer($id_team, $id_player){
+        $team = Team::where('id',$id_team)->first();
+        $player = Player::where('id_user', $id_player)->first();
+        $player->id_team = null;
+        $player->save();
+        return[
+            'success' => 200
+        ];
+    }
 }
