@@ -28,29 +28,25 @@ class ManagerController extends Controller
 
         return $this->updateManager($team->id_manager);
         
-        // if($this->updateManager($team->id_manager)){
-        //     return [
-        //         'success' => 200
-        //     ];
-        // }
+        if($this->updateManager($team->id_manager)){
+            return [
+                'success' => 200
+            ];
+        }
     }
 
     public function updateManager($id)
     {
         $managerTeam = $this->searchTeam($id);
-        return $managerTeam;
-        $manager = Manager::where('id_user',$id)->get;
-        $manager->id_team = $managerTeam;
-        return $manager->save();
+        $manager = Manager::where('id_user',$id)->get();
+        $manager[0]->id_team = $managerTeam;
+        return $manager[0]->save();
     }
 
     public function searchTeam($id)
     {
-        $team = new Team(Team::where('id_manager',$id)->get()->all());
-        // $team = Team::where('id_manager',$id)->get();
         $team = Team::where('id_manager',$id)->get();
-        // $idTeam = $team->id;
-        return $team;
+        return $team[0]->id;
     }
 
 
