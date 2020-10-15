@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Player;
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -45,6 +47,10 @@ class TeamController extends Controller
         ];
     }
 
+    public function addPlayer(Request $request, $id){
+        
+    }
+
     /**
      * Display the specified resource.
      *
@@ -53,9 +59,12 @@ class TeamController extends Controller
      */
     public function show($id)
     {
+
         $team = Team::find($id);
+        $player = Player::all();
         return [
-            'team' => $team
+            'team' => $team,
+            'player' => $player
         ];
     }
 

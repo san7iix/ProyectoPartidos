@@ -111,6 +111,10 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('delete/{id}', 'App\Http\Controllers\UserController@destroy')->name('user.delete');
 });
 
+Route::group(['prefix' => 'manager'], function (){
+    Route::get('show/{id}', 'App\Http\Controllers\TeamController@show')->name('team.show');
+});
+
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
