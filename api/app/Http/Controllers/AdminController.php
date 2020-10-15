@@ -25,8 +25,6 @@ class AdminController extends Controller
         $users = User::all();
 
         $data_users = $this->data_users();
-        // dd($datos_select['roles'][1]->nombre[0]);
-
         return [
             'users' => $users,
             'data_users' => $data_users
@@ -75,14 +73,14 @@ class AdminController extends Controller
         $user->id_role = $request->role_id;
 
         $user->save();
-        if ($user->id_role == 2) {
+        if ($user->id_role == 3) {
             $player = new Player();
             $player->id_user = $user->id;
             $player->save();
             return [
                 'success' => 200
             ];
-        } else if ($user->id_role == 3) {
+        } else if ($user->id_role == 2) {
             $manager = new Manager();
             $manager->id_user = $user->id;
             $manager->save();
