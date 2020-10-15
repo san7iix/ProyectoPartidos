@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField'
+import EquiposManager from '../../../api_interact/Manager/Equipos/EquipoManager'
 
 class CardCrearEquipo extends Component {
 
@@ -13,7 +14,7 @@ class CardCrearEquipo extends Component {
         this.state = {
             name: '',
             uniform: '',
-            id_manager: this.props.match.params.id
+            id_manager: this.props.id_manager
         }
         this.handleChange = this.handleChange.bind(this)
         this.CrearEquipo = this.CrearEquipo.bind(this)
@@ -37,6 +38,7 @@ class CardCrearEquipo extends Component {
 
         EquiposManager.Crear(equipo)
         .then(res=>{
+            console.log(res)
             if(res.success===200)alert('Equipo agregado correctamente')
             window.location.reload(false);
         })

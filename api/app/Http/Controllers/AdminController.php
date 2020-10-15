@@ -73,14 +73,14 @@ class AdminController extends Controller
         $user->id_role = $request->role_id;
 
         $user->save();
-        if ($user->id_role == 3) {
+        if ($user->id_role == 2) {
             $player = new Player();
             $player->id_user = $user->id;
             $player->save();
             return [
                 'success' => 200
             ];
-        } else if ($user->id_role == 2) {
+        } else if ($user->id_role == 3) {
             $manager = new Manager();
             $manager->id_user = $user->id;
             $manager->save();
@@ -107,14 +107,8 @@ class AdminController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        if ($user->id_role == 2) { //Show data player
-            $data_user = $user->player;
-        } else if ($user->id_role == 3) { //Show data manager
-            $data_user = $user->manager;
-        }
         return [
             'user' => $user,
-            'data_user' => $data_user
         ];
     }
 
