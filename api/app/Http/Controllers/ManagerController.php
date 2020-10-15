@@ -54,9 +54,9 @@ class ManagerController extends Controller
         $data = Team::select('teams.name', 'managers.id_user', 'users.name as name_user', 'teams.id')
                 ->join('managers', 'teams.id_manager', '=', 'managers.id_user')
                 ->join('users', 'users.id', '=', 'managers.id_user')->where('id_manager',$id)
-                ->get();
+                ->first();
 
-        return $data[0];
+        return $data;
     }
 
     public function searchPlayers()
