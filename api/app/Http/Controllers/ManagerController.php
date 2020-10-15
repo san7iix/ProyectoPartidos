@@ -59,6 +59,12 @@ class ManagerController extends Controller
         return $data;
     }
 
+    public function team($id)
+    {
+        $team = Team::find($id)->first();
+        return $team;
+    }
+
     public function searchPlayers()
     {
         $data = Player::select('users.name', 'players.id_user')
