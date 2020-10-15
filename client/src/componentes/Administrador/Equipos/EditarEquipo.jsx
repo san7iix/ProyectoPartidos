@@ -45,9 +45,8 @@ class EditarEquipo extends Component {
         EquiposAdmin.Detalles(this.state.id)
         .then(res => {
             this.setState({
-                id: res.team.id,
-                name: res.team.name,
-                uniform: res.team.uniform,
+                name: res.manager[0].name,
+                uniform: res.manager[0].uniform,
             })
         })
         .catch(err => {
@@ -73,7 +72,7 @@ class EditarEquipo extends Component {
                 <Card>
                     <CardContent>
                         <Typography color="textSecondary" gutterBottom>
-                            Editar cancha
+                            Editar equipo
                         </Typography>
                         <form>
                             <br/>

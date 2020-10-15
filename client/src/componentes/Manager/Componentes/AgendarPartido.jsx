@@ -39,8 +39,9 @@ class AgendarPartido extends Component {
         }
         EquipoManager.CreateMatch(datos)
         .then(res=>{
+            console.log(res)
             if(res.success===200)alert('Se ha agendado un partido')
-                window.location.reload(false);
+                // window.location.reload(false);
         })
         .catch(err=>{
             console.log(err)

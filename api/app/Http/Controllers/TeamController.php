@@ -68,7 +68,7 @@ class TeamController extends Controller
                 ->where('teams.id',$id)
                 ->get();
 
-        $data2 = Team::select('teams.name', 'managers.id_user as manager', 'users.name as name_user')
+        $data2 = Team::select('teams.name', 'managers.id_user as manager', 'users.name as name_user', 'teams.uniform')
             ->join('managers', 'teams.id_manager', '=', 'managers.id_user')
             ->join('users', 'users.id', '=', 'managers.id_user')
             ->where('teams.id',$id)
