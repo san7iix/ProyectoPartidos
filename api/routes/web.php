@@ -91,7 +91,7 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::post('create', 'App\Http\Controllers\TeamController@store')->name('team.create');
 
-        Route::get('show/{id}', 'App\Http\Controllers\TeamController@show')->name('team.show');
+        Route::get('show/{id}', 'App\Http\Controllers\TeamController@showTeam')->name('team.show');
 
         Route::put('update/{id}', 'App\Http\Controllers\TeamController@update')->name('team.update');
 
@@ -112,10 +112,11 @@ Route::group(['prefix' => 'user'], function () {
 });
 
 Route::group(['prefix' => 'manager'], function (){
-    Route::get('showTeam/{id}', 'App\Http\Controllers\TeamController@showTeam')->name('team.showTeam');
-    Route::get('searchPlayers', 'App\Http\Controllers\TeamController@searchPlayers')->name('team.search');
+    Route::get('showTeam/{id}', 'App\Http\Controllers\ManagerController@showTeam')->name('team.showTeam');
+    Route::get('searchPlayers', 'App\Http\Controllers\ManagerController@searchPlayers')->name('team.search');
     Route::post('storeTeam', 'App\Http\Controllers\ManagerController@storeTeam')->name('team.storeTeam');
 });
+
 
 
 

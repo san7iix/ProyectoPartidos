@@ -50,21 +50,7 @@ class TeamController extends Controller
         ];
     }
 
-    public function searchPlayers()
-    {
-        // $players = Player::where('id_team',null)->get();
-        // $users = User::where('id_role',2)->get();
-        // return [
-        //     'players' => $players,
-        //     'users' => $users
-        // ];
-
-        $data = Player::select('users.name', 'players.id_user')
-                ->join('users', 'players.id_user', '=', 'users.id')->where('id_team',null)
-                ->get();
-
-        return $data;
-    }
+    
 
     public function addPlayer(Request $request, $id){
         
@@ -78,18 +64,22 @@ class TeamController extends Controller
      */
     public function showTeam($id)
     {
-        // $team = Team::where('id_manager',$id)->get();
-        // $man = Manager::where('id_user',$id)->get();
-        // return [
-        //     'team' => $team,
-        //     'manager' => $man
-        // ];
-        $data = Team::select('teams.name', 'managers.id_user', 'users.name as name_user')
+        $data = Team::select('teams.name', 'players.id_user as player', 'users.name as name_user')
+                ->join('players', 'players.id_team', '=', 'teams.id')
+                ->join('users', 'users.id', '=', 'players.id_user')
                 ->join('managers', 'teams.id_manager', '=', 'managers.id_user')
-                ->join('users', 'users.id', '=', 'managers.id_user')->where('id_manager',$id)
+                ->where('teams.id',$id)
                 ->get();
-
-        return $data;
+                
+        $data2 = Team::select('teams.name', 'managers.id_user as manager', 'users.name as manager_name')
+            ->join('managers', 'teams.id_manager', '=', 'managers.id_user')
+            ->join('users', 'users.id', '=', 'managers.id_user')->where('teams.id',$id)
+            ->get();
+        
+        return [
+            'players' => $data,
+            'manager' => $data2
+        ];
     }
 
     /**

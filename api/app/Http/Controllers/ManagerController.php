@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Team;
+use App\Models\Player;
 use App\Models\Manager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -45,6 +46,26 @@ class ManagerController extends Controller
     {
         $team = Team::where('id_manager',$id)->get();
         return $team[0]->id;
+    }
+
+
+    public function showTeam($id)
+    {
+        $data = Team::select('teams.name', 'managers.id_user', 'users.name as name_user')
+                ->join('managers', 'teams.id_manager', '=', 'managers.id_user')
+                ->join('users', 'users.id', '=', 'managers.id_user')->where('id_manager',$id)
+                ->get();
+
+        return $data;
+    }
+
+    public function searchPlayers()
+    {
+        $data = Player::select('users.name', 'players.id_user')
+                ->join('users', 'players.id_user', '=', 'users.id')->where('id_team',null)
+                ->get();
+
+        return $data;
     }
 
 
