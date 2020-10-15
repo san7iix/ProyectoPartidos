@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
-import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,8 +6,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { CardHeader } from '@material-ui/core';
 import EquipoManager from '../../../api_interact/Manager/Equipos/EquipoManager';
+import AddIcon from '@material-ui/icons/Add';
+import { Link } from 'react-router-dom'
+
 
 
 
@@ -19,23 +18,38 @@ class CardJugadoresDisponibles extends Component {
         super(props)
 
         this.state = {
-            players: []
+            players: [],
+            id_team: this.props.id_team
         }
 
         this.getFreePlayers = this.getFreePlayers.bind(this)
+        this.addFreePlayer = this.addFreePlayer.bind(this)
     }
 
-    getFreePlayers(){
-        EquipoManager.GetFreePlayers()
+    addFreePlayer(id_team, id_player){
+        EquipoManager.AddPlayer(id_team,id_player)
         .then(res=>{
-            console.log(res)
+            if(res.success===200)alert('Jugador agregado a tu equipo')
+            window.location.reload(false);
         })
         .catch(err=>{
             console.log(err)
         })
     }
 
-    componentDidMount(){
+    getFreePlayers() {
+        EquipoManager.GetFreePlayers()
+            .then(res => {
+                this.setState({
+                    players: res
+                })
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+    componentDidMount() {
         this.getFreePlayers()
     }
 
@@ -49,18 +63,18 @@ class CardJugadoresDisponibles extends Component {
                             <TableCell align="right">Nombre</TableCell>
                             <TableCell align="right">Acciones</TableCell>
                         </TableRow>
-                        <TableBody>
-                            {
-                                this.state.players.map((player) => (
-                                    <TableRow key={player.id}>
-                                        <TableCell align="right">{player.name}</TableCell>
-                                        <TableCell align="right">{player.name}</TableCell>
-                                        <TableCell align="right">Agregar al equipo</TableCell>
-                                    </TableRow>
-                                ))
-                            }
-                        </TableBody>
                     </TableHead>
+                    <TableBody>
+                        {
+                            this.state.players.map((player) => (
+                                <TableRow key={player.id_user}>
+                                    <TableCell align="right">{player.id_user}</TableCell>
+                                    <TableCell align="right">{player.name}</TableCell>
+                                    <TableCell align="right"><button onClick={()=>this.addFreePlayer(this.state.id_team, player.id_user)} ><AddIcon/></button></TableCell>
+                                </TableRow>
+                            ))
+                        }
+                    </TableBody>
                 </Table>
             </TableContainer>
         );

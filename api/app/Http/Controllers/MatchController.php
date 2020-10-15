@@ -27,6 +27,8 @@ class MatchController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $match = new Match($request->all());
         $validate = Validator::make($request->all(), [
             'id_team_1'=> ['required'],
@@ -42,6 +44,7 @@ class MatchController extends Controller
 
         $match->fill($request->all());
         $match->state = 1;
+        $match->hour = $request->hour;
         $match->save();
         return [
             'success' => 200

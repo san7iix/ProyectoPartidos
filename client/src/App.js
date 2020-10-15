@@ -27,9 +27,11 @@ import SportsSoccerIcon from '@material-ui/icons/SportsSoccer';
 import InicioUsuario from './componentes/Jugador/InicioUsuario'
 import HomeIcon from '@material-ui/icons/Home';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import EventIcon from '@material-ui/icons/Event';
 import Equipos from './componentes/Administrador/Equipos/Equipos';
 import EditarEquipo from './componentes/Administrador/Equipos/EditarEquipo';
 import InicioManager from './componentes/Manager/InicioManager'
+import AgendarPartido from './componentes/Manager/Componentes/AgendarPartido';
 
 const drawerWidth = 300;
 
@@ -158,6 +160,12 @@ function App() {
                 <ListItemText primary="Inicio Manager" />
               </ListItem>
             </Link>
+            <Link to="/manager/agendar">
+              <ListItem button >
+                <ListItemIcon><EventIcon/></ListItemIcon>
+                <ListItemText primary="Agendar partido" />
+              </ListItem>
+            </Link>
             <Link to="/usuarios">
               <ListItem button >
                 <ListItemIcon><PersonIcon/></ListItemIcon>
@@ -198,6 +206,7 @@ function App() {
             <Route exact path="/usuario/inicio" component={InicioUsuario}/>
             {/* Rutas manager */}
             <Route exact path="/manager/inicio/:id" component={InicioManager}/>
+            <Route exact path="/manager/agendar/:id" component={AgendarPartido}/>
           </Switch>
         </main>
       </div>

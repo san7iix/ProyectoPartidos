@@ -51,7 +51,7 @@ class ManagerController extends Controller
 
     public function showTeam($id)
     {
-        $data = Team::select('teams.name', 'managers.id_user', 'users.name as name_user')
+        $data = Team::select('teams.name', 'managers.id_user', 'users.name as name_user', 'teams.id')
                 ->join('managers', 'teams.id_manager', '=', 'managers.id_user')
                 ->join('users', 'users.id', '=', 'managers.id_user')->where('id_manager',$id)
                 ->get();
@@ -65,7 +65,7 @@ class ManagerController extends Controller
                 ->join('users', 'players.id_user', '=', 'users.id')->where('id_team',null)
                 ->get();
 
-        return $data[0];
+        return $data;
     }
 
     public function addPlayer($id_team, $id_player){
