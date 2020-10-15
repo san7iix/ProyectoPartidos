@@ -62,13 +62,16 @@ class MatchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function validateTeams()
+    public function validateTeams($id1, $id2)
     {
-        $team = Team::where('id', '1')->first();
+        $team = Team::where('id', $id1)->first();
         if ($team != null) {
-            $team2 = Team::where('id', '20')->first();
+            $team2 = Team::where('id', $id2)->first();
             if ($team2 != null) {
-                return true;
+                if($id1 != $id2){
+                    return true;
+                }
+                return 4;
             }
             return 3;
         }
