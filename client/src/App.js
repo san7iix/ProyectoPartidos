@@ -24,10 +24,12 @@ import Canchas from "./componentes/Administrador/Canchas/Canchas";
 import EditarCancha from "./componentes/Administrador/Canchas/EditarCancha";
 import PersonIcon from '@material-ui/icons/Person';
 import SportsSoccerIcon from '@material-ui/icons/SportsSoccer';
-import InicioUsuario from './componentes/Usuario/InicioUsuario'
+import InicioUsuario from './componentes/Jugador/InicioUsuario'
+import HomeIcon from '@material-ui/icons/Home';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import Equipos from './componentes/Administrador/Equipos/Equipos';
 import EditarEquipo from './componentes/Administrador/Equipos/EditarEquipo';
+import InicioManager from './componentes/Manager/InicioManager'
 
 const drawerWidth = 300;
 
@@ -146,8 +148,14 @@ function App() {
           <List>
             <Link to="/usuario/inicio">
               <ListItem button >
-                <ListItemIcon><PersonIcon/></ListItemIcon>
+                <ListItemIcon><HomeIcon/></ListItemIcon>
                 <ListItemText primary="Inicio usuarios" />
+              </ListItem>
+            </Link>
+            <Link to="/manager/inicio">
+              <ListItem button >
+                <ListItemIcon><HomeIcon/></ListItemIcon>
+                <ListItemText primary="Inicio Manager" />
               </ListItem>
             </Link>
             <Link to="/usuarios">
@@ -188,6 +196,8 @@ function App() {
             <Route exact path="/equipos/editar/:id" component={EditarEquipo} />
             {/* Rutas usuario */}
             <Route exact path="/usuario/inicio" component={InicioUsuario}/>
+            {/* Rutas manager */}
+            <Route exact path="/manager/inicio" component={InicioManager}/>
           </Switch>
         </main>
       </div>

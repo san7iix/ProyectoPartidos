@@ -30,7 +30,7 @@ class TablaUsuarios extends Component {
             .then(res => {
                 res.users.map(usuario => {
                     if (usuario.id_role === 2) usuario.id_role = "Manager"
-                    else if (usuario.id_role === 3) usuario.id_role = "Usuario"
+                    else if (usuario.id_role === 3) usuario.id_role = "Jugador"
                     return usuario
                 })
                 this.setState({ usuarios: res.users })
