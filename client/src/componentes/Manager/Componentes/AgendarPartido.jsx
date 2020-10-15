@@ -21,7 +21,8 @@ class AgendarPartido extends Component {
             id_place : '',
             date: '',
             hour: '',
-            canchas: []
+            canchas: [],
+            error : ''
         }
 
         this.getCanchas = this.getCanchas.bind(this)
@@ -40,8 +41,18 @@ class AgendarPartido extends Component {
         EquipoManager.CreateMatch(datos)
         .then(res=>{
             console.log(res)
-            if(res.success===200)alert('Se ha agendado un partido')
-                // window.location.reload(false);
+
+            if(res.success===4)this.setState({
+                error: 'No puede agendarse un partido con equipos de id iguales'
+            })
+            else if(res.success===3)this.setState({
+                error: 'No existe un equipo con el id indicado'
+            })            
+
+            if(res.success===200){
+                alert('Se ha agendado un partido')
+                window.location.reload(false);
+            }
         })
         .catch(err=>{
             console.log(err)
@@ -101,6 +112,7 @@ class AgendarPartido extends Component {
                             <TextField value={this.state.hour} id="hour" name="hour" type="time" variant="outlined" onChange={this.handleChange}/>
                         </CardContent>
                         <CardActions>
+                            <div>{this.state.error}</div>
                             <Button onClick={this.agendarPartido}>Agendar</Button>
                         </CardActions>
                     </Card>
