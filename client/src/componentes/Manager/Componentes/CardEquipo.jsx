@@ -45,7 +45,7 @@ class CardEquipo extends Component {
             if(res.success===200){
                 alert('Se eliminó el jugador de su equipo')
             }
-            // window.location.reload(false);
+            window.location.reload(false);
         })
         .catch(err=>{
             console.log(err)

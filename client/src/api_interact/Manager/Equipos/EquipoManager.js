@@ -26,6 +26,31 @@ class EquipoManager {
         }
     }
 
+
+    async CreateMatch(equipo) {
+        try {
+            const res = await fetch(`${config.API_URL}manager/match/createMatch `, {
+                method: 'POST',
+                body: JSON.stringify({
+                    "name": equipo.name,
+                    "uniform": equipo.uniform,
+                    "id_manager": equipo.id_manager
+                }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+                }
+            })
+            const data = await res.json()
+            return data
+        } catch (error) {
+            return console.log(error)
+        }
+    }
+
+    
     async AddPlayer(id_team,id_player) {
         try {
             const res = await fetch(`${config.API_URL}manager/addPlayer/${id_team}/${id_player}`, {
@@ -101,8 +126,8 @@ class EquipoManager {
     
     async DeletePlayer(id_team, id_player){
         try {
-            const res = await fetch(`${config.API_URL}manager/deletePlayer/${id_team}/${id_player}`, {
-                method: 'GET',
+            const res = await fetch(`${config.API_URL}manager/removePlayer/${id_team}/${id_player}`, {
+                method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
