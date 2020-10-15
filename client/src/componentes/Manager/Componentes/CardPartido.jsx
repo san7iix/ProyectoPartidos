@@ -26,18 +26,35 @@ class InicioUsuario extends Component {
     getMatch(){
         EquipoManager.GetMatchsPending(this.state.id_team)
         .then(res=>{
-            let resp=res[0]
             this.setState({
-                equipo1: resp.id_team_1,
-                equipo2: resp.id_team_1,
-                fecha: resp.date,
-                hora: resp.hour,
-                lugar: resp.id_place
+                equipo1: res.id_team_1,
+                equipo2: res.id_team_1,
+                fecha: res.date,
+                hora: res.hour,
+                lugar: res.name_plce
             })
             console.log(this.state)
         })
         .catch(err=>{
 
+        })
+    }
+
+    getNombresEquipos(){
+        EquipoManager.SimpleGetEquipo(this.state.equipo1)
+        .then(res=>{
+            console.log(res)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+
+        EquipoManager.SimpleGetEquipo(this.state.equipo2)
+        .then(res=>{
+            console.log(res)
+        })
+        .catch(err=>{
+            console.log(err)
         })
     }
 
