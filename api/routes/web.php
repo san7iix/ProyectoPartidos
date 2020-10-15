@@ -105,6 +105,8 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 
+
+
 //User routes
 Route::group(['prefix' => 'user'], function () {
     Route::post('create', 'App\Http\Controllers\UserController@store')->name('user.create');
@@ -114,11 +116,22 @@ Route::group(['prefix' => 'user'], function () {
     Route::put('update/{id}', 'App\Http\Controllers\UserController@update')->name('user.update');
 
     Route::get('delete/{id}', 'App\Http\Controllers\UserController@destroy')->name('user.delete');
+    
+    Route::group(['prefix' => 'place'], function () {
+
+        Route::get('/', 'App\Http\Controllers\PlaceController@index')->name('place.index');
+    
+        Route::get('show/{id}', 'App\Http\Controllers\PlaceController@show')->name('place.show');
+    
+    });
 });
 
 Route::group(['prefix' => 'manager'], function (){
+
     Route::get('showTeam/{id}', 'App\Http\Controllers\ManagerController@showTeam')->name('team.showTeam');
+
     Route::get('searchPlayers', 'App\Http\Controllers\ManagerController@searchPlayers')->name('team.search');
+
     Route::post('storeTeam', 'App\Http\Controllers\ManagerController@storeTeam')->name('team.storeTeam');
 
     Route::get('showMatchesPending/{id_team}', 'App\Http\Controllers\MatchController@showMatchesPending')->name('match.showMatchesPending');
