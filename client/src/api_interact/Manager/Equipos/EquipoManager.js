@@ -27,14 +27,16 @@ class EquipoManager {
     }
 
 
-    async CreateMatch(equipo) {
+    async CreateMatch(datos) {
         try {
             const res = await fetch(`${config.API_URL}manager/match/createMatch `, {
                 method: 'POST',
                 body: JSON.stringify({
-                    "name": equipo.name,
-                    "uniform": equipo.uniform,
-                    "id_manager": equipo.id_manager
+                    "id_team_1": datos.id_team_1,
+                    "id_team_2": datos.id_team_2,
+                    "id_place": datos.id_place,
+                    "date": datos.date,
+                    "hour": datos.hour
                 }),
                 headers: {
                     'Accept': 'application/json',

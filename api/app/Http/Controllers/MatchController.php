@@ -27,6 +27,8 @@ class MatchController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $match = new Match($request->all());
         $validate = Validator::make($request->all(), [
             'id_team_1'=> ['required'],

@@ -5,6 +5,7 @@ import CardEquipo from './Componentes/CardEquipo'
 import CardCrearEquipo from './Componentes/CardCrearEquipo'
 import EquipoManager from '../../api_interact/Manager/Equipos/EquipoManager'
 import CardJugadoresDisponibles from './Componentes/CardJugadoresDisponibles';
+import AgendarPartido from './Componentes/AgendarPartido';
 
 
 class InicioUsuario extends Component {
@@ -40,7 +41,7 @@ class InicioUsuario extends Component {
         return (
             <Grid container spacing={4}>
                     {
-                        this.state.equipo.id_user && <Grid item xs={4}><CardPartido/></Grid>
+                        this.state.equipo.id_user && <Grid item xs={4}><CardPartido/></Grid> 
                     }
                     
                 
@@ -58,6 +59,9 @@ class InicioUsuario extends Component {
                         this.state.equipo.id_user  && <Grid item xs={4}><CardJugadoresDisponibles id_team={this.state.equipo.id} /></Grid>
                     }
                 
+                    {
+                        this.state.equipo.id_user && <Grid item><AgendarPartido id_team={this.state.equipo.id}/></Grid>
+                    }
             </Grid>
         );
     }

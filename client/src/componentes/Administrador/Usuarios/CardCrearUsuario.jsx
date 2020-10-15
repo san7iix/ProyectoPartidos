@@ -45,6 +45,7 @@ class CardCrearUsuario extends Component {
             .then(res => {
                 if(res.success===200)alert('Usuario agregado correctamente')
                 window.location.reload(false);
+                console.log(res)
             })
             .catch(err => {
                 console.log(err)

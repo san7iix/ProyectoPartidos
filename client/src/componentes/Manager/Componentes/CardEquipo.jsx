@@ -63,6 +63,7 @@ class CardEquipo extends Component {
                 <CardContent>
                     <Typography>Equipo</Typography>
                     <Typography><h2>{this.state.nombre_equipo}</h2></Typography>
+                    <Typography><p>Id de equipo: {this.state.id_equipo}</p></Typography>
                     <Typography><b>Manager:</b> {this.state.manager}</Typography>
                     <Typography><h6>Jugadores</h6></Typography>
                     <TableContainer component={Paper}>
