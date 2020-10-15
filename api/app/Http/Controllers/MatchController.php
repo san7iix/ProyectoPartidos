@@ -80,10 +80,12 @@ class MatchController extends Controller
 
     public function showMatchesPending($id_team)
     {
-        $match = Match::where('state', 1)
+        $match = Match::select('places.name as place_name', 'matches.id_team_1', 'matches.id_team_2')
+            ->join('places', 'matches.id_place', '=', 'places.id')
+            ->where('state', 1)
             ->where('id_team_1', $id_team)
             ->orWhere('id_team_2', $id_team)
-            ->get();
+            ->first();
 
         return $match;
     }
