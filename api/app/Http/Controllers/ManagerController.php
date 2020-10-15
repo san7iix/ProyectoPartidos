@@ -77,6 +77,4 @@ class ManagerController extends Controller
             'success' => 200
         ];
     }
-
-
 }
