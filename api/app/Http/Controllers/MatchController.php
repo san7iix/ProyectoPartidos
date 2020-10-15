@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Match;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -29,10 +30,10 @@ class MatchController extends Controller
     {
         $match = new Match($request->all());
         $validate = Validator::make($request->all(), [
-            'id_team_1'=> ['required'],
-            'id_team_2'=> ['required'],
+            'id_team_1' => ['required'],
+            'id_team_2' => ['required'],
             'id_place' => ['required'],
-            'date'=> ['required', 'max:255', 'string']
+            'date' => ['required', 'max:255', 'string']
         ]);
         if ($validate->fails()) {
             return [
@@ -40,13 +41,19 @@ class MatchController extends Controller
             ];
         }
 
-        $match->fill($request->all());
-        $match->state = 1;
-        $match->hour = $request->hour;
-        $match->save();
-        return [
-            'success' => 200
-        ];
+        if ($this->validateTeams($request->id_team_1, $request->id_team_2) == 1) {
+            $match->fill($request->all());
+            $match->state = 1;
+            $match->hour = $request->hour;
+            $match->save();
+            return [
+                'success' => 200
+            ];
+        } else {
+            return [
+                'success'=> $this->validateTeams($request->id_team_1, $request->id_team_2),
+            ];
+        }
     }
 
     /**
@@ -55,17 +62,25 @@ class MatchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function validateTeams()
     {
-        //
+        $team = Team::where('id', '1')->first();
+        if ($team != null) {
+            $team2 = Team::where('id', '20')->first();
+            if ($team2 != null) {
+                return true;
+            }
+            return 3;
+        }
+        return 2;
     }
 
     public function showMatchesPending($id_team)
     {
         $match = Match::where('state', 1)
-        ->where('id_team_1', $id_team)
-        ->orWhere('id_team_2', $id_team)
-        ->get();
+            ->where('id_team_1', $id_team)
+            ->orWhere('id_team_2', $id_team)
+            ->get();
 
         return $match;
     }
