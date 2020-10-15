@@ -121,7 +121,7 @@ Route::group(['prefix' => 'manager'], function (){
     Route::get('searchPlayers', 'App\Http\Controllers\ManagerController@searchPlayers')->name('team.search');
     Route::post('storeTeam', 'App\Http\Controllers\ManagerController@storeTeam')->name('team.storeTeam');
 
-    Route::get('showMatchesPending/{id_team_1}', 'App\Http\Controllers\MatchController@showMatchesPending')->name('match.showMatchesPending');
+    Route::get('showMatchesPending/{id_team}', 'App\Http\Controllers\MatchController@showMatchesPending')->name('match.showMatchesPending');
     
     
     Route::post('addPlayer/{id_team}/{id_player}', [
