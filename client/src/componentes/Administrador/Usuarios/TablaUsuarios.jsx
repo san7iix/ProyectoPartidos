@@ -29,8 +29,9 @@ class TablaUsuarios extends Component {
         UsuarioAdminService.getUsuarios()
             .then(res => {
                 res.users.map(usuario => {
-                    if (usuario.id_role === 2) usuario.id_role = "Manager"
-                    else if (usuario.id_role === 3) usuario.id_role = "Jugador"
+                    if (usuario.id_role === 1) usuario.id_role = "Administrador"
+                    else if (usuario.id_role === 2) usuario.id_role = "Jugador"
+                    else if (usuario.id_role === 3) usuario.id_role = "Manager"
                     return usuario
                 })
                 this.setState({ usuarios: res.users })
