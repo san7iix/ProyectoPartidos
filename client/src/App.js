@@ -197,7 +197,7 @@ function App() {
             {/* Rutas usuario */}
             <Route exact path="/usuario/inicio" component={InicioUsuario}/>
             {/* Rutas manager */}
-            <Route exact path="/manager/inicio" component={InicioManager}/>
+            <Route exact path="/manager/inicio/:id" component={InicioManager}/>
           </Switch>
         </main>
       </div>
