@@ -52,9 +52,7 @@ class TeamController extends Controller
 
     
 
-    public function addPlayer(Request $request, $id){
-        
-    }
+    
 
     /**
      * Display the specified resource.

@@ -68,5 +68,9 @@ class ManagerController extends Controller
         return $data;
     }
 
+    public function addPlayer(Request $request, $id){
+        
+    }
+
 
 }
