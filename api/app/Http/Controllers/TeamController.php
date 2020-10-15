@@ -89,7 +89,7 @@ class TeamController extends Controller
                 ->join('users', 'users.id', '=', 'managers.id_user')->where('id_manager',$id)
                 ->get();
 
-        return $data;
+        return $data[0];
     }
 
     /**

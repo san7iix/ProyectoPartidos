@@ -107,8 +107,8 @@ class EditarUsuario extends Component {
                                         id="role_id"
                                         onChange={this.handleChange}
                                     >
-                                        <MenuItem value={2}>Manager</MenuItem>
-                                        <MenuItem value={3}>Jugador</MenuItem>
+                                        <MenuItem value={2}>Jugador</MenuItem>
+                                        <MenuItem value={3}>Manager</MenuItem>
                                     </Select>
                                 </div>
                             </form>

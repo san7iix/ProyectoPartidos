@@ -78,8 +78,8 @@ class CardCrearUsuario extends Component {
                                 id="select_rol"
                                 onChange={this.handleChange}
                             >
-                                <MenuItem value={2}>Manager</MenuItem>
-                                <MenuItem value={3}>Jugador</MenuItem>
+                                <MenuItem value={2}>Jugador</MenuItem>
+                                <MenuItem value={3}>Manager</MenuItem>
                             </Select>
                         </div>
                     </form>
