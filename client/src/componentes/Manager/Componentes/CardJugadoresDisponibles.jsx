@@ -30,7 +30,7 @@ class CardJugadoresDisponibles extends Component {
         EquipoManager.AddPlayer(id_team,id_player)
         .then(res=>{
             if(res.success===200)alert('Jugador agregado a tu equipo')
-            this.getFreePlayers()
+            window.location.reload(false);
         })
         .catch(err=>{
             console.log(err)

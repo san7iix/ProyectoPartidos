@@ -23,7 +23,6 @@ class InicioUsuario extends Component {
     getEquipo(){
         EquipoManager.GetEquipo(this.state.id_manager).
         then(res=>{
-            console.log(res)
             this.setState({
                 equipo: res
             })
@@ -52,7 +51,7 @@ class InicioUsuario extends Component {
                 
                 
                     {
-                        this.state.equipo.id_user  ? <Grid item xs={4}><CardEquipo name={this.state.equipo.name} manager={this.state.equipo.name_user} /></Grid> :  <div>No tienes ningún equipo a cargo.</div>
+                        this.state.equipo.id_user  ? <Grid item xs={4}><CardEquipo name={this.state.equipo.name} manager={this.state.equipo.name_user} id_team={this.state.equipo.id} /></Grid> :  <div>No tienes ningún equipo a cargo.</div>
                     }
 
                     {

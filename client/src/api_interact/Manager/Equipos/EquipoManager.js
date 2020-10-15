@@ -79,6 +79,46 @@ class EquipoManager {
             return console.log(error)
         }
     }
+    
+    async GetPlayers(id_team){
+        try {
+            const res = await fetch(`${config.API_URL}manager/showTeamPlayers/${id_team}`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+                }
+            })
+            const data = await res.json()
+            return data
+        } catch (error) {
+            return console.log(error)
+        }
+    }
+
+    
+    async DeletePlayer(id_team, id_player){
+        try {
+            const res = await fetch(`${config.API_URL}manager/deletePlayer/${id_team}/${id_player}`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+                }
+            })
+            const data = await res.json()
+            return data
+        } catch (error) {
+            return console.log(error)
+        }
+    }
+
+
+
 
 
 
