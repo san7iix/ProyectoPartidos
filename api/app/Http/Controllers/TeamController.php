@@ -41,6 +41,7 @@ class TeamController extends Controller
             ];
         }
         $team = new Team($request->all());
+        $team->fill($request->all());
         $team->save();
         return [
             'success' => 200
@@ -59,12 +60,9 @@ class TeamController extends Controller
      */
     public function show($id)
     {
-
         $team = Team::find($id);
-        $player = Player::all();
         return [
             'team' => $team,
-            'player' => $player
         ];
     }
 
