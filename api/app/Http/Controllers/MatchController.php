@@ -44,6 +44,7 @@ class MatchController extends Controller
 
         $match->fill($request->all());
         $match->state = 1;
+        $match->hour = $request->hour;
         $match->save();
         return [
             'success' => 200
