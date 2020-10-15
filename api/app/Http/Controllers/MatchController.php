@@ -61,6 +61,16 @@ class MatchController extends Controller
         //
     }
 
+    public function showMatchesPending($id_team)
+    {
+        $match = Match::where('state', 1)
+        ->where('id_team_1', $id_team)
+        ->orWhere('id_team_2', $id_team)
+        ->get();
+
+        return $match;
+    }
+
     /**
      * Update the specified resource in storage.
      *
