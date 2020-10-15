@@ -96,6 +96,11 @@ Route::group(['prefix' => 'admin'], function () {
         Route::put('update/{id}', 'App\Http\Controllers\TeamController@update')->name('team.update');
 
         Route::get('delete/{id}', 'App\Http\Controllers\TeamController@destroy')->name('team.delete');
+
+
+        Route::group(['prefix' => 'match'], function () {
+            Route::get('index', 'App\Http\Controllers\MatchController@index');
+        });
     });
 });
 
@@ -120,6 +125,12 @@ Route::group(['prefix' => 'manager'], function (){
         'as' => 'addPlayer',
         'uses' => 'App\Http\Controllers\ManagerController@addPlayer',
     ]);
+    
+    Route::get('showTeamPlayers/{id}', 'App\Http\Controllers\TeamController@showTeam')->name('team.showTeamPlayers');
+
+    Route::group(['prefix' => 'match'], function () {
+        Route::post('createMatch', 'App\Http\Controllers\MatchController@store');
+    });
 });
 
 

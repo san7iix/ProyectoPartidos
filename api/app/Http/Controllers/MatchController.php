@@ -31,6 +31,7 @@ class MatchController extends Controller
         $validate = Validator::make($request->all(), [
             'id_team_1'=> ['required'],
             'id_team_2'=> ['required'],
+            'id_place' => ['required'],
             'date'=> ['required', 'max:255', 'string']
         ]);
         if ($validate->fails()) {
