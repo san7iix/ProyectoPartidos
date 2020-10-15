@@ -56,7 +56,7 @@ class ManagerController extends Controller
                 ->join('users', 'users.id', '=', 'managers.id_user')->where('id_manager',$id)
                 ->get();
 
-        return $data;
+        return $data[0];
     }
 
     public function searchPlayers()
@@ -65,7 +65,7 @@ class ManagerController extends Controller
                 ->join('users', 'players.id_user', '=', 'users.id')->where('id_team',null)
                 ->get();
 
-        return $data;
+        return $data[0];
     }
 
     public function addPlayer(Request $request, $id){

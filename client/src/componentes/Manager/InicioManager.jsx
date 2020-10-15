@@ -4,6 +4,7 @@ import CardPartido from './Componentes/CardPartido'
 import CardEquipo from './Componentes/CardEquipo'
 import CardCrearEquipo from './Componentes/CardCrearEquipo'
 import EquipoManager from '../../api_interact/Manager/Equipos/EquipoManager'
+import CardJugadoresDisponibles from './Componentes/CardJugadoresDisponibles';
 
 
 class InicioUsuario extends Component {
@@ -22,6 +23,7 @@ class InicioUsuario extends Component {
     getEquipo(){
         EquipoManager.GetEquipo(this.state.id_manager).
         then(res=>{
+            console.log(res)
             this.setState({
                 equipo: res
             })
@@ -48,11 +50,15 @@ class InicioUsuario extends Component {
                     }
                     
                 
-                <Grid item xs={4}>
+                
                     {
-                        this.state.equipo.id_user  ? <CardEquipo name={this.state.equipo.name} manager={this.state.equipo.name_user} /> :  <div>No tienes ningún equipo a cargo.</div>
+                        this.state.equipo.id_user  ? <Grid item xs={4}><CardEquipo name={this.state.equipo.name} manager={this.state.equipo.name_user} /></Grid> :  <div>No tienes ningún equipo a cargo.</div>
                     }
-                </Grid>
+
+                    {
+                        this.state.equipo.id_user  && <Grid item xs={4}><CardJugadoresDisponibles/></Grid>
+                    }
+                
             </Grid>
         );
     }
