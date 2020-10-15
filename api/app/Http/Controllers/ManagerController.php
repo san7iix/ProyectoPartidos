@@ -26,8 +26,6 @@ class ManagerController extends Controller
         $team->fill($request->all());
         $team->save();
 
-        return $this->updateManager($team->id_manager);
-        
         if($this->updateManager($team->id_manager)){
             return [
                 'success' => 200
