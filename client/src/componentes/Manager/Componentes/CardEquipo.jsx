@@ -8,7 +8,8 @@ class CardEquipo extends Component {
         super(props)
         this.state = {
             nombre_equipo: this.props.name,
-            manager: this.props.manager
+            manager: this.props.manager,
+            jugadores: this.props.companeros
         }
     }
     render() {
@@ -18,7 +19,7 @@ class CardEquipo extends Component {
                     <Typography>Equipo</Typography>
                     <Typography><h2>{this.state.nombre_equipo}</h2></Typography>
                     <Typography><b>Manager:</b> {this.state.manager}</Typography>
-                    <Typography><h6>Compañeros</h6></Typography>
+                    <Typography><h6>Jugadores</h6></Typography>
                 </CardContent>
             </Card>
         );

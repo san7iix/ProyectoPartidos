@@ -29,7 +29,7 @@ class InicioUsuario extends Component {
             })
         })
         .catch(err=>{
-
+            console.log(err)
         })
     }
 
@@ -56,7 +56,7 @@ class InicioUsuario extends Component {
                     }
 
                     {
-                        this.state.equipo.id_user  && <Grid item xs={4}><CardJugadoresDisponibles/></Grid>
+                        this.state.equipo.id_user  && <Grid item xs={4}><CardJugadoresDisponibles id_team={this.state.equipo.id} /></Grid>
                     }
                 
             </Grid>

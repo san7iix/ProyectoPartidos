@@ -25,6 +25,24 @@ class EquipoManager {
             return console.log(error)
         }
     }
+
+    async AddPlayer(id_team,id_player) {
+        try {
+            const res = await fetch(`${config.API_URL}manager/addPlayer/${id_team}/${id_player}`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+                }
+            })
+            const data = await res.json()
+            return data
+        } catch (error) {
+            return console.log(error)
+        }
+    }
     
     async GetEquipo(id_manager) {
         try {
@@ -61,6 +79,8 @@ class EquipoManager {
             return console.log(error)
         }
     }
+
+
 
 
 }
