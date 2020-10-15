@@ -68,8 +68,14 @@ class ManagerController extends Controller
         return $data;
     }
 
-    public function addPlayer(Request $request, $id){
-        
+    public function addPlayer($id_team, $id_player){
+        $team = Team::where('id',$id_team)->first();
+        $player = Player::where('id_user', $id_player)->first();
+        $player->id_team = $team->id;
+        $player->save();
+        return[
+            'success' => 200
+        ];
     }
 
 

@@ -115,6 +115,10 @@ Route::group(['prefix' => 'manager'], function (){
     Route::get('showTeam/{id}', 'App\Http\Controllers\ManagerController@showTeam')->name('team.showTeam');
     Route::get('searchPlayers', 'App\Http\Controllers\ManagerController@searchPlayers')->name('team.search');
     Route::post('storeTeam', 'App\Http\Controllers\ManagerController@storeTeam')->name('team.storeTeam');
+    Route::post('addPlayer/{id_team}/{id_player}', [
+        'as' => 'addPlayer',
+        'uses' => 'App\Http\Controllers\ManagerController@addPlayer',
+    ]);
 });
 
 
