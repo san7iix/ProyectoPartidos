@@ -56,7 +56,7 @@ Route::post('email/resend', 'App\Http\Controllers\Auth\VerificationController@re
 
 //Admin routes
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     //User routes
 
@@ -97,7 +97,6 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('delete/{id}', 'App\Http\Controllers\TeamController@destroy')->name('team.delete');
 
-
         Route::group(['prefix' => 'match'], function () {
             Route::get('index', 'App\Http\Controllers\MatchController@index');
         });
@@ -126,7 +125,7 @@ Route::group(['prefix' => 'user'], function () {
     });
 });
 
-Route::group(['prefix' => 'manager'], function (){
+Route::group(['prefix' => 'manager', 'middleware' => 'auth'], function (){
 
     Route::get('showTeam/{id}', 'App\Http\Controllers\ManagerController@showTeam')->name('team.showTeam');
 
@@ -156,8 +155,5 @@ Route::group(['prefix' => 'manager'], function (){
         Route::post('createMatch', 'App\Http\Controllers\MatchController@store');
     });
 });
-
-
-
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -54,8 +54,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-
-
+        
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -67,6 +66,7 @@ class AdminController extends Controller
                 'success' => $validator->fails()
             ];
         }
+
         $user = new User($request->all());
         $user->password = bcrypt($request->password);
         $user->email = $request->email;
@@ -89,12 +89,9 @@ class AdminController extends Controller
             ];
         }
 
-
         return [
             'success' => 401
         ];
-        // Session::flash('message', 'Successfully');
-
     }
 
     /**
