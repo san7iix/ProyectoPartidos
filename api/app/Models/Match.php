@@ -24,4 +24,9 @@ class Match extends Model
     {
         return $this->belongsTo('App\User', 'id_place');
     }
+
+    public function state()
+    {
+        return $this->belongsTo('App\Models\State', 'state');
+    }
 }

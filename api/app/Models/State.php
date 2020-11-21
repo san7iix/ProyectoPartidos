@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class State extends Model
 {
     use HasFactory;
+    protected $fillable=['desc'];
+
+    public function matches()
+    {
+        return $this->hasMany('App\Models\Match', 'state');
+    }
 }

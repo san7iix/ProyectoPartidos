@@ -18,6 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/redirect_user', 'App\Http\Controllers\HomeController@redirect')->name('home.redirect');
+
 // Login Routes...
 
 Route::get('login', 'App\Http\Controllers\Auth\LoginController@showLoginForm')->name('login');

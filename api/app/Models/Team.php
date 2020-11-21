@@ -27,4 +27,10 @@ class Team extends Model
     {
         return $this->hasMany('App\Models\Match', 'id');
     }
+
+
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category', 'category_id');
+    }
 }
