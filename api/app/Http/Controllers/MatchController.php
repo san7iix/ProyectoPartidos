@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Goal;
 use App\Models\Match;
+use App\Models\Player;
 use App\Models\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
+
+
 
 class MatchController extends Controller
 {
@@ -15,11 +20,11 @@ class MatchController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct()
+    /*public function __construct()
     {
         $this->middleware('auth');
         
-    }
+    }*/
 
 
 
@@ -99,6 +104,51 @@ class MatchController extends Controller
         return $match;
     }
 
+
+
+    /**
+     * state = 3 -> partido finalizado
+     */
+    public function resultsMatch(Request $request, $id)
+    {
+        $match = Match::find($id);
+        $match->state = 3;
+        $match->save();
+
+        if($match->goal_t1 > 0){
+            $response = $this->resultsGoal($request, $match->id);
+            if($response){
+                return [
+                    'success' => 200
+                ];
+            }
+        }
+        $response = $this->resultsGoal($request, $match->id);
+        if($response){
+            return [
+                'success' => 200
+            ];
+        }
+    }
+
+    public function searchPlayers($t1, $t2)
+    {
+        $players = Player::where('id_team', $t1)
+                            ->orWhere('id_team', $t2)
+                            ->get();
+        // $players->mapWithKeys(function($player){
+        //     return [$player['id'] => $player['id_team']];
+        // });
+        return $players[$t1];
+    }
+
+    public function resultsGoal($request, $id)
+    {
+        $goal = new Goal($request->all());
+        $goal->id_match = $id;
+        $goal->save();
+        return true;
+    }
     /**
      * Update the specified resource in storage.
      *

@@ -58,7 +58,7 @@ Route::post('email/resend', 'App\Http\Controllers\Auth\VerificationController@re
 
 //Admin routes
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'admin'], function () {
 
     //User routes
 
@@ -101,11 +101,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
         Route::group(['prefix' => 'match'], function () {
             Route::get('index', 'App\Http\Controllers\MatchController@index');
-        });
+            Route::post('results_match/{id}', 'App\Http\Controllers\MatchController@resultsMatch')->name('match.results');
+
+        }); 
+    });
+    Route::group(['prefix' => 'match'], function () {
+        Route::post('results_match/{id}', 'App\Http\Controllers\MatchController@resultsMatch')->name('match.results');
     });
 });
 
-
+Route::get('show_pl/{id_1}/{id_2}', 'App\Http\Controllers\MatchController@searchPlayers');
 
 
 //User routes
