@@ -6,6 +6,7 @@ use App\Models\Goal;
 use App\Models\Match;
 use App\Models\Player;
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
@@ -114,32 +115,48 @@ class MatchController extends Controller
         $match = Match::find($id);
         $match->state = 3;
         $match->save();
-
-        if($match->goal_t1 > 0){
-            $response = $this->resultsGoal($request, $match->id);
-            if($response){
-                return [
-                    'success' => 200
-                ];
+        if($this->searchPlayers($request->id))
+        {
+            if($request->goal_t1 > 0){
+                $response = $this->resultsGoal($request, $match->id);
+                if($response){
+                    return [
+                        'success' => 200
+                    ];
+                }
+            }else if($request->goal_t2 > 0){
+                $response = $this->resultsGoal($request, $match->id);
+                if($response){
+                    return [
+                        'success' => 200
+                    ];
+                }
             }
-        }
-        $response = $this->resultsGoal($request, $match->id);
-        if($response){
-            return [
-                'success' => 200
-            ];
         }
     }
 
-    public function searchPlayers($t1, $t2)
+    public function searchPlayers($id)
     {
-        $players = Player::where('id_team', $t1)
-                            ->orWhere('id_team', $t2)
+        $players = Player::where('id', $id)
                             ->get();
-        // $players->mapWithKeys(function($player){
-        //     return [$player['id'] => $player['id_team']];
-        // });
-        return $players[$t1];
+        // return $players->map(function($player){
+        //     return $player_ob = $this->getPlayerName($player->id_user);      
+        // })->all();
+
+        if(count($players) > 0){
+            return 1;
+        }
+
+        return 0;
+        
+    }
+
+    public function getPlayerName($id)
+    {
+        $player = User::select('name')
+                            ->where('id', $id)
+                            ->get();
+        return $player;
     }
 
     public function resultsGoal($request, $id)

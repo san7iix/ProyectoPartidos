@@ -110,7 +110,7 @@ Route::group(['prefix' => 'admin'], function () {
     });
 });
 
-Route::get('show_pl/{id_1}/{id_2}', 'App\Http\Controllers\MatchController@searchPlayers');
+Route::get('show_pl/{id}', 'App\Http\Controllers\MatchController@searchPlayers');
 
 
 //User routes
