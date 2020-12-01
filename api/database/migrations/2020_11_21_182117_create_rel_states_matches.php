@@ -27,6 +27,8 @@ class CreateRelStatesMatches extends Migration
      */
     public function down()
     {
-        
+        Schema::table('matches', function (Blueprint $table) {
+            $table->dropForeign(['state']);    
+        });
     }
 }

@@ -27,6 +27,10 @@ class CreateRelationshipsMatchesPlaces extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('relationships_matches_places');
+        Schema::table('matches', function (Blueprint $table) {
+            $table->dropForeign(['id_team_1']);
+            $table->dropForeign(['id_team_2']);
+            $table->dropForeign(['id_place']);    
+        });
     }
 }

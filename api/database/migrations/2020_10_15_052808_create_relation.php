@@ -26,7 +26,7 @@ class CreateRelation extends Migration
     public function down()
     {
         Schema::table('teams', function (Blueprint $table) {
-            //
+            $table->dropForeign(['id_manager']);    
         });
     }
 }
