@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid' 
+import Grid from '@material-ui/core/Grid'
+import Row from '@material-ui/core'
 import CardPartido from './Componentes/CardPartido'
 import CardEquipo from './Componentes/CardEquipo';
+import PartidosPasados from './PartidosPasados';
 
 class InicioUsuario extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
 
         this.state = {
-            partido : {
+            partido: {
                 equipo1: 'Equipo1',
                 equipo2: 'Equipo2',
                 hora: '00:15',
@@ -21,11 +23,19 @@ class InicioUsuario extends Component {
     render() {
         return (
             <Grid container spacing={4}>
-                <Grid item xs={4}>
-                    <CardPartido/>
+                <Grid direction="row" container spacing={2} justify="center">
+                    <Grid item>
+                        <CardPartido />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <CardEquipo />
+                    </Grid>
                 </Grid>
-                <Grid item xs={4}>
-                    <CardEquipo/>
+
+                <Grid item direction="row" container spacing={2} justify="center" alignItems="center">
+                    <Grid item xs={5} >
+                        <PartidosPasados />
+                    </Grid>
                 </Grid>
             </Grid>
         );

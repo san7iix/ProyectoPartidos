@@ -27,11 +27,15 @@ import SportsSoccerIcon from '@material-ui/icons/SportsSoccer';
 import InicioUsuario from './componentes/Jugador/InicioUsuario'
 import HomeIcon from '@material-ui/icons/Home';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import SettingsPowerIcon from '@material-ui/icons/SettingsPower';
 import EventIcon from '@material-ui/icons/Event';
 import Equipos from './componentes/Administrador/Equipos/Equipos';
 import EditarEquipo from './componentes/Administrador/Equipos/EditarEquipo';
 import InicioManager from './componentes/Manager/InicioManager'
 import AgendarPartido from './componentes/Manager/Componentes/AgendarPartido';
+import Login from './componentes/Login';
+import DetallesPartido from './componentes/Jugador/Componentes/DetallesPartido';
+import Perfil from './componentes/Perfil';
 
 const drawerWidth = 300;
 
@@ -131,7 +135,7 @@ function App() {
           </Typography>
           </Toolbar>
         </AppBar>
-        <Divider/>
+        <Divider />
         <Drawer
           className={classes.drawer}
           variant="persistent"
@@ -146,42 +150,54 @@ function App() {
               {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </IconButton>
           </div>
-          <Divider/>
+          <Divider />
           <List>
             <Link to="/usuario/inicio">
               <ListItem button >
-                <ListItemIcon><HomeIcon/></ListItemIcon>
+                <ListItemIcon><HomeIcon /></ListItemIcon>
                 <ListItemText primary="Inicio usuarios" />
               </ListItem>
             </Link>
-            <Link to="/manager/inicio">
+            <Link to="/manager/inicio/2">
               <ListItem button >
-                <ListItemIcon><HomeIcon/></ListItemIcon>
+                <ListItemIcon><HomeIcon /></ListItemIcon>
                 <ListItemText primary="Inicio Manager" />
               </ListItem>
             </Link>
-            <Link to="/manager/agendar">
+            <Link to="/manager/agendar/1">
               <ListItem button >
-                <ListItemIcon><EventIcon/></ListItemIcon>
+                <ListItemIcon><EventIcon /></ListItemIcon>
                 <ListItemText primary="Agendar partido" />
               </ListItem>
             </Link>
             <Link to="/usuarios">
               <ListItem button >
-                <ListItemIcon><PersonIcon/></ListItemIcon>
+                <ListItemIcon><PersonIcon /></ListItemIcon>
                 <ListItemText primary="Usuarios" />
               </ListItem>
             </Link>
             <Link to="/canchas">
               <ListItem button >
-                <ListItemIcon><LocationOnIcon/></ListItemIcon>
+                <ListItemIcon><LocationOnIcon /></ListItemIcon>
                 <ListItemText primary="Canchas" />
               </ListItem>
             </Link>
             <Link to="/equipos">
               <ListItem button >
-                <ListItemIcon><SportsSoccerIcon/></ListItemIcon>
+                <ListItemIcon><SportsSoccerIcon /></ListItemIcon>
                 <ListItemText primary="Equipos" />
+              </ListItem>
+            </Link>
+            <Link to="/perfil/1">
+              <ListItem button >
+                <ListItemIcon><PersonIcon /></ListItemIcon>
+                <ListItemText primary="Perfil" />
+              </ListItem>
+            </Link>
+            <Link to="/login">
+              <ListItem button >
+                <ListItemIcon><SettingsPowerIcon /></ListItemIcon>
+                <ListItemText primary="Cerrar sesión" />
               </ListItem>
             </Link>
           </List>
@@ -193,20 +209,24 @@ function App() {
         >
           <div className={classes.drawerHeader} />
           <Switch>
+            {/* Ruta generales */}
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/perfil/:id" component={Perfil} />
             {/* Rutas administrador */}
             <Route exact path="/inicio" component={Inicio} />
             <Route exact path="/usuarios" component={Usuarios} />
             <Route exact path="/usuarios/editar/:id" component={EditarUsuario} />
-            <Route exact path="/usuarios/detalle/:id" component={DetalleUsuario} />
+            <Route exact path="/usuarios/detalle/:id" component={Perfil} />
             <Route exact path="/canchas" component={Canchas} />
             <Route exact path="/canchas/editar/:id" component={EditarCancha} />
             <Route exact path="/equipos" component={Equipos} />
             <Route exact path="/equipos/editar/:id" component={EditarEquipo} />
             {/* Rutas usuario */}
-            <Route exact path="/usuario/inicio" component={InicioUsuario}/>
+            <Route exact path="/usuario/inicio" component={InicioUsuario} />
+            <Route exact path="/detallesPartido/:id" component={DetallesPartido} />
             {/* Rutas manager */}
-            <Route exact path="/manager/inicio/:id" component={InicioManager}/>
-            <Route exact path="/manager/agendar/:id" component={AgendarPartido}/>
+            <Route exact path="/manager/inicio/:id" component={InicioManager} />
+            <Route exact path="/manager/agendar/:id" component={AgendarPartido} />
           </Switch>
         </main>
       </div>

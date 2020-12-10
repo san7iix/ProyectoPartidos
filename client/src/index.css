@@ -28,3 +28,7 @@ table a{
 table a svg:hover{
   color: #3f51b5;
 }
+
+#loginForm{
+  text-align: center;
+}

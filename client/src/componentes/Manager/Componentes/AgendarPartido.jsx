@@ -13,12 +13,12 @@ import EquipoManager from '../../../api_interact/Manager/Equipos/EquipoManager';
 
 class AgendarPartido extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             id_team_1: this.props.id_team,
             id_team_2: '',
-            id_place : '',
+            id_place: '',
             date: '',
             hour: '',
             canchas: []
@@ -29,7 +29,7 @@ class AgendarPartido extends Component {
         this.agendarPartido = this.agendarPartido.bind(this)
     }
 
-    agendarPartido(){
+    agendarPartido() {
         const datos = {
             "id_team_1": this.state.id_team_1,
             "id_team_2": this.state.id_team_2,
@@ -38,25 +38,25 @@ class AgendarPartido extends Component {
             "hour": this.state.hour
         }
         EquipoManager.CreateMatch(datos)
-        .then(res=>{
-            if(res.success===200)alert('Se ha agendado un partido')
+            .then(res => {
+                if (res.success === 200) alert('Se ha agendado un partido')
                 window.location.reload(false);
-        })
-        .catch(err=>{
-            console.log(err)
-        })
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
-    getCanchas(){
+    getCanchas() {
         CanchasAdmin.GetCanchas()
-        .then(res=>{
-            this.setState({
-                canchas: res.places
+            .then(res => {
+                this.setState({
+                    canchas: res.places
+                })
             })
-        })
-        .catch(err=>{
-            console.log(err)
-        })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     handleChange(e) {
@@ -67,19 +67,22 @@ class AgendarPartido extends Component {
 
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.getCanchas()
     }
 
     render() {
         return (
             <Grid container>
-                <Grid item xs={12}>
+                <Grid item xs container
+                    direction="row"
+                    justify="center"
+                    alignItems="center">
                     <Card>
                         <CardContent>
                             <h3>Agendar partido</h3>
-                            <TextField value={this.state.id_team_2} id="id_team_2" name="id_team_2" type="number" label="Id equipo contrario" variant="outlined" onChange={this.handleChange}/>
-                            <br/><br/>
+                            <TextField value={this.state.id_team_2} id="id_team_2" name="id_team_2" type="number" label="Id equipo contrario" variant="outlined" onChange={this.handleChange} />
+                            <br /><br />
                             <InputLabel>Sitio</InputLabel>
                             <Select
                                 name="id_place"
@@ -89,15 +92,15 @@ class AgendarPartido extends Component {
                                 onChange={this.handleChange}
                             >
                                 {
-                                    this.state.canchas.map((cancha)=>(
+                                    this.state.canchas.map((cancha) => (
                                         <MenuItem key={cancha.id} value={cancha.id}>{cancha.name}</MenuItem>
                                     ))
                                 }
                             </Select>
-                            <br/>
-                            <br/>
-                            <TextField value={this.state.date} id="date" name="date" type="date" variant="outlined" onChange={this.handleChange}/>
-                            <TextField value={this.state.hour} id="hour" name="hour" type="time" variant="outlined" onChange={this.handleChange}/>
+                            <br />
+                            <br />
+                            <TextField value={this.state.date} id="date" name="date" type="date" variant="outlined" onChange={this.handleChange} />
+                            <TextField value={this.state.hour} id="hour" name="hour" type="time" variant="outlined" onChange={this.handleChange} />
                         </CardContent>
                         <CardActions>
                             <Button onClick={this.agendarPartido}>Agendar</Button>
