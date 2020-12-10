@@ -16,13 +16,13 @@ class HomeController extends Controller
     protected $admin_role;
     protected $player_role;
     protected $manager_role;
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->admin_role = 1;
-        $this->player_role = 2;
-        $this->manager_role = 3;
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    //     $this->admin_role = 1;
+    //     $this->player_role = 2;
+    //     $this->manager_role = 3;
+    // }
     /**
      * Show the application dashboard.
      *

@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\Validator;
 class ManagerController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('auth');
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
         
-    }
+    // }
 
     public function storeTeam(Request $request)
     {

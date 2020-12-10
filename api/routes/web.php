@@ -132,7 +132,7 @@ Route::group(['prefix' => 'user'], function () {
     });
 });
 
-Route::group(['prefix' => 'manager', 'middleware' => 'auth'], function (){
+Route::group(['prefix' => 'manager'], function (){
 
     Route::get('showTeam/{id}', 'App\Http\Controllers\ManagerController@showTeam')->name('team.showTeam');
 
